@@ -1,0 +1,71 @@
+.blue .mdl-navigation__link{
+    color: #22ABE8;
+}
+
+.red {
+    color : #DC2C69;
+}
+
+.grey {
+    color : #3B3B3A;
+}
+
+.material-icons {
+    color: #22ABE8;
+}
+
+.bandeau {
+    background-color: #FFFFFF;
+}
+
+.backgroundCreate {
+    /* background-color : #DC2C69; */
+    background-image: url(../../public/build/assets/images/backgrounds/font10.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.backgroundRead {
+    background-image: url(../../public/build/assets/images/backgrounds/font14.jpg);
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+
+.backgroundBlue {
+    background-color: #22ABE8;
+    color: deeppink
+}
+
+.backgroundRed {
+    background-color: rgb(255, 0, 0);
+    color: yellow;
+}
+
+.backgroundGrey {
+    background-color: gray;
+    color: antiquewhite;
+}
+
+.backgroundWhite {
+    background-color: whitesmoke;
+}
+
+.heightPet {
+    height: 15rem;
+}
+
+.heightMoy {
+    height: 40rem;
+}
+
+.paragraphe {
+    margin: auto;
+    text-align: center;
+    text-decoration: none;
+    /* vertical-align: text-bottom; */
+    /* margin-top: 2rem; */
+}
+
+.row {
+    margin: auto;
+}

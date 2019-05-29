@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} StoreFreeze {% endblock %}
+
+{% block body_id %}app{% endblock %}
+
+{% block header %}
+
+    {# {% include 'shared/_header.html.twig' %} #}
+{% endblock %}
+
+{% block main %}
+    {% include 'baseOpen.html.php' %}
+
+
+<div class="mdl-tabs__tab-bar">
+    <a class="mdl-navigation__link mdl-tabs__tab" href="createStore">Ajouter Stock</a>
+    <a class="mdl-navigation__link mdl-tabs__tab" href="readStore">Voir Stock</a>
+</div>
+
+
+{# <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+  <div class="mdl-tabs__tab-bar">
+      <a href="#starks-panel" class="mdl-tabs__tab is-active">Starks</a>
+      <a href="#lannisters-panel" class="mdl-tabs__tab">Lannisters</a>
+      <a href="#targaryens-panel" class="mdl-tabs__tab">Targaryens</a>
+  </div>
+
+  <div class="mdl-tabs__panel is-active" id="starks-panel">
+    <ul>
+      <li>Eddard</li>
+      <li>Catelyn</li>
+      <li>Robb</li>
+      <li>Sansa</li>
+      <li>Brandon</li>
+      <li>Arya</li>
+      <li>Rickon</li>
+    </ul>
+  </div>
+  <div class="mdl-tabs__panel" id="lannisters-panel">
+    <ul>
+      <li>Tywin</li>
+      <li>Cersei</li>
+      <li>Jamie</li>
+      <li>Tyrion</li>
+    </ul>
+  </div>
+  <div class="mdl-tabs__panel" id="targaryens-panel">
+    <ul>
+      <li>Viserys</li>
+      <li>Daenerys</li>
+    </ul>
+  </div>
+</div> #}
+
+
+<p class="h2 col-12">
+
+
+    {# {{ 'title.app'|trans }} #}
+    Stock
+</p>
+    {% include 'baseClose.html.php' %}
+{% endblock %}

@@ -1,0 +1,36 @@
+.Textfooter 
+{
+    margin-top : 3rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    background-color: rgba(59,59,58,1);
+    color:lavender;
+    text-align: center;
+    height: 100%;
+    font-size: 0.6;
+}
+
+.tableCss
+{
+    border: none;
+    border-color: rgba(59,59,58,1);
+}
+
+.TitreFooter
+{
+    font-size: 1.1rem;
+    color: rgba(255, 230, 49, 0.8);
+}
+
+.SousTitreFooter
+{
+    font-size: 1rem;
+    color: rgba(255, 230, 49, 0.897);
+}
+
+.textData
+{
+    font-size: 0.9rem;
+    text-align: left;
+}
+

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} StoreFreeze {% endblock %}
+
+{% block body_id %}app{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block main %}
+    {% include 'baseOpen.html.php' %}
+
+    <div class="mdl-tabs__tab-bar backgroundCreate">
+        <a class="mdl-navigation__link mdl-tabs__tab" href="createStore">Ajouter Produits</a>
+        <a class="mdl-navigation__link mdl-tabs__tab" href="readStore">Voir Produits</a>
+    </div>
+
+    <section class ="paragraphe subtitle backgroundCreate">
+        <div class="black">
+            <h3>Créer produit</h3>
+        </div>
+        <div> 
+            {{ form_start(form, {
+                attr: {
+                    novalidate : "novalidate",
+                    class: "row"
+                }
+            }) }}
+            <div class="border col-12 col-lg6">
+                <br>
+                {{ form_row(form.name) }}
+                <br>
+                {# {{ form_row(form.quantityGr) }} #}
+                <br>
+                {{ form_row(form.QuantityUnit) }}
+                <br>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit"><a href="{{ path('readStore') }}" style="color:white; text-decoration:none">Annuler</a></button>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit">Valider</button>
+                <br>
+                {{ form_end(form) }}
+                <br>
+            </div>
+            <br>
+        </div>                    
+        {% include 'baseClose.html.php' %}
+    </section>
+{% endblock %}

@@ -1,0 +1,31 @@
+.mdl-button--myColorValidate {
+    background: #22ABE8;
+    color: snow;
+    text-transform: initial;
+}
+
+.littleButton {
+    background: #22ABE8;
+    width: 30px;
+    color: snow;
+    text-transform: initial;
+}
+
+.mdl-button--myColorCancel {
+    background:#DC2C69;
+    color: snow;
+    text-transform: initial;
+    margin-left: 5px;
+}
+
+.buttonTop
+{
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.buttonBottom
+{
+    margin-bottom: 1em;
+}

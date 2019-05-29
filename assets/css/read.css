@@ -1,0 +1,108 @@
+.tableShowJob, td, th, table {
+    margin: auto;
+    box-sizing: unset;
+}
+
+.thTab {
+    width: 80px;
+    color: rgb(172, 27, 27);
+}
+
+.td {
+    height: 45px;
+}
+
+.borderTrue {
+    border: 1px solid black;
+}
+
+.heightCellule {
+    height: 1rem;
+}
+
+.borderRadius {
+    border: 1px solid black;
+}
+
+.borderHidden {
+    border: 0;
+}
+
+.Button {
+    width: 150px;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;  
+    border-radius: 50%;  
+}
+
+.tdButton {
+    width: 180px;
+}
+
+.tableShowProduct {
+    width: 80%;
+    margin-left: 7rem;
+    margin: auto;
+    box-shadow: 8px 8px 12px rgb(30, 30, 30);
+}
+
+.leftMenu {
+    float: left;
+    margin-left: 1em;
+    left: 1em;
+    width: 2rem;
+}
+
+.boxShadow {
+    box-shadow: 8px 8px 12px rgb(30, 30, 30);
+}
+
+.textShadow {
+    text-shadow: 4px 4px 8px rgb(30, 30, 30);
+    /* font-weight : bolder; */
+    font-size: medium;
+}
+
+caption {
+    background-color: rgba(220,44,105,0.1);
+    color: black;
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: underline;
+    text-transform: capitalize;
+    line-height: 2em;
+    vertical-align: middle;
+}
+
+.captionTrie {
+    background-color: rgba(255, 0, 0, 0.3);
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+}
+
+th {
+    background-color: rgba(34, 171, 232, 0.3);
+    color: black;
+    text-shadow: 4px 4px 2px grey;
+    width: 7em;
+    padding-left: 1em;
+    padding-right: 1em;
+    height: 2.5rem;
+}
+
+.pointerRead {
+    cursor:pointer;
+}
+.descrip {
+    width: 45rem;
+}
+
+.butt, .nameComp {
+    width: 11rem;
+}
+
+.htPage {
+    min-height: 1100px;
+}

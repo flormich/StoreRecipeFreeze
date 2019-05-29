@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} StoreFreeze {% endblock %}
+
+{% block body_id %}app{% endblock %}
+
+{% block header %}
+
+    {# {% include 'shared/_header.html.twig' %} #}
+{% endblock %}
+
+{% block main %}
+    {% include 'baseOpen.html.php' %}
+<p class="h2 col-12">
+    {{ 'title.app'|trans }}
+</p>
+    {% include 'baseClose.html.php' %}
+
+{% endblock %}

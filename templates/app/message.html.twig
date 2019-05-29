@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}StoreFreeze{% endblock %}
+
+{% block main %}
+    {% include 'baseOpen.html.php' %}
+    <p class="h2 col-12">
+        <br><br><br>
+        <section class="paragraphe subtitle">
+            {% if app.session.flashBag.has('action') %}
+                <div class="red alert-success">
+                    {% for msg in app.session.flashBag.get('action') %}
+                        <h3>{{ msg }}</h3>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {# <meta http-equiv="refresh" content="1; url=index" /> #}
+            <form action="{{ path('index') }}">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit">
+                    <a href="index" style="color:white; text-decoration:none">Accueil</a>
+                </button>
+            </form>
+            <br>
+            {# <tr> #}
+            {# <form action="{{ path('createStore') }}"> #}
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit">
+                    <a href="createStore" style="color:white; text-decoration:none">Ajouter produit</a>
+                </button>
+            {# </form> #}
+            {# <form action="{{ path('readStore') }}"> #}
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit">
+                    <a href="readStore" style="color:white; text-decoration:none">Voir produit</a>
+                </button>
+            {# </form> #}
+            {# </tr> #}
+            <br><br>
+            {# <tr> #}
+            {# <form action="{{ path('createRecette') }}"> #}
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit">
+                    <a href="createRecette" style="color:white; text-decoration:none">Ajouter recette</a>
+                </button>
+            {# </form> #}
+            {# <form action="{{ path('readRecette') }}"> #}
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit">
+                    <a href="readRecette" style="color:white; text-decoration:none">Voir recette</a>
+                </button>
+            {# </form> #}
+            {# </tr> #}
+        </section>
+    </p>
+{% endblock %}
+        

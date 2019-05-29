@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} StoreFreeze {% endblock %}
+
+{% block body_id %}app{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block main %}
+    {% include 'baseOpen.html.php' %}
+    <div class="backgroundCreate">
+
+        <div class="mdl-tabs__tab-bar">
+            <a class="mdl-navigation__link mdl-tabs__tab" href="createRecette">Ajouter Recette</a>
+            <a class="mdl-navigation__link mdl-tabs__tab" href="readRecette">Voir Recette</a>
+        </div>
+
+        <section class="paragraphe subtitle read">
+            <div class="black">
+                <h3>Recettes</h3>
+            </div>
+            {# menu de gauche #}
+            <div>            
+                <nav>
+                    <table class="leftMenu">
+                        <thead>
+                            <th class="captionTrie pointerRead" onclick="document.location='{{ path('readRecette') }}'">Trier par plat</th> 
+                        </thead>
+                        <tbody>
+                            {% for plat in plats %}
+                            <tr>
+                                <td class="pointerRead" onclick="document.location='{{ path('readRecettePlat', 
+                                {'name':plat.name}) }}'">
+                                {{ plat.name }}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </nav>
+            </div>
+
+            <div class="black">
+                <div>
+                    <table class="tableShowJob backgroundWhite">
+                        <tbody class="pointerRead">
+                            <tr>
+                                <th>Nom</th>
+                                <th>Photos</th>
+                                <th>Nombre de personne</th>                                
+                                <th>Temps totals</th>
+                                <th>Plats</th>
+                                <th>Livres</th>
+                                <th>Couleur du livre</th>
+                                <th>Pages</th>
+                                <th>Ingredients</th>
+                                <th colspan='1'>Interagir</th>
+                            </tr>
+                            {% for recette in recettes %}
+                            <tr onclick="document.location='{{ path('showSpecRecipe', {'id':recette.id}) }}'">
+                                <td>{{ recette.name }}</td>
+                                <td></td>
+                                <td>{{ recette.numberPeople }}</td>                                
+                                <td><b>Prepa :</b> {{ recette.timePrepa|date('H:i:s') }} <br> <b>Cuiss :</b> {{ recette.timeBaking|date('H:i:s') }}</td>
+                                <td>{{ recette.plat.name }}</td>
+                                <td>{{ recette.book.name }}</td>
+                                <td>{{ recette.book.color }}</td>
+                                <td>{{ recette.page }}</td>
+                                <td><ul>
+                                {% for productRecette in productRecettes %}                                
+                                    {% if recette.id == productRecette.recette.id %}
+                                        <li>{{ productRecette.product.name }}<br></li>
+                                    {% endif %}                                   
+                                {% endfor %}
+                                </ul></td>
+                                        <td>
+                                        {# delete button #}
+                                            <br>
+                                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit">                                               
+                                                <a href="{{ path('deleteRecipe', {'id':recette.id}) }}" style="color:white; text-decoration:none" onclick="if(!confirm('Confirmer la suppression du produit ?')) return false;">Supprimer</a>
+                                            </button>
+                                            <br><br>
+                                        {# </td>
+                                        <br>
+                                        <td>            #}
+                                        {# update button #}
+                                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit"> 
+                                                <a href="{{ path('updateRecipe', {'id':recette.id}) }}" style="color:white; text-decoration:none">Modifier</a>
+                                            </button>
+                                            <br><br>
+                                        </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+            </div>
+            {% include 'baseClose.html.php' %}
+        <section>
+    </div>
+{% endblock %}

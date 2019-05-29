@@ -1,0 +1,79 @@
+{% extends "base.html.twig" %}
+
+{% block title %}StoreFreezer{% endblock %}
+
+{% block body_id %}app{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block main %}
+    {% include 'baseOpen.html.php' %}
+
+    <div class="mdl-tabs__tab-bar">
+        <a class="mdl-navigation__link mdl-tabs__tab" href="createRecette">Ajouter Recette</a>
+        <a class="mdl-navigation__link mdl-tabs__tab" href="readRecette">Voir Recette</a>
+    </div>
+    {% for recette in recettes %}
+    <section class="paragraphe subtitle backgroundCreate">
+        <div class="black">
+            {# <h3>Recette {{ recette.name }}</h3> #}
+        </div>
+
+        <div class="black">
+            <div>
+                <table class="tableShowJob backgroundWhite">
+                    <tbody>
+                        <tr>                      
+                            <th>{{ recette.pictureRecette }}</th>      
+                            <th colspan='3'><h3><u>{{ recette.name }}</u></h3></th>                            
+                        </tr>
+                        <tr HEIGHT=10px>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th colspan='1'>Ingredients</th>
+                            <th>Nombre de personne</th>
+                            <th>Temps</th>
+                            <th>Livres</th>
+                        </tr>
+                        <tr>
+                        <td rowspan='3'>
+                            {% for productRecette in productRecettes %}
+                                {% if recette.id == productRecette.recette.id %}
+                                    <li>{{ productRecette.product.name }}</li><br>
+                                {% endif %}                                
+                            {% endfor %}
+                            
+                        </td>
+                        {# </tr> #}
+
+                        {# <tr>
+                            <th>Nombre de personne</th>
+                            <th>Temps</th>
+                            <th>Livres</th>
+                        </tr> #}
+                        {# <tr> #}
+                            <td>{{ recette.numberPeople }}</td>
+                            <td><b> Temps de préparation : </b>{{ recette.timePrepa|date('H:i:s') }}
+                                <br>
+                                <b> Temps de cuisson : </b>{{ recette.timeBaking|date('H:i:s') }}
+                            </td>
+                            <td>{{ recette.book.name }}<br> <b>Couleur : </b>{{ recette.book.color }} <br> <b>Page</b> N°{{ recette.page }}</td>
+                        </tr>
+
+                        <tr>
+                            <th  colspan='6'>Description</th>
+                        </tr>
+                        <tr>
+                            <td colspan='6'>{{ recette.description|nl2br }}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <br><br><br><br>
+        </div>
+    {% include 'baseClose.html.php' %}
+    </section>
+    {% endfor %}
+{% endblock %}
