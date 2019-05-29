@@ -1,4 +1,4 @@
-# StoreRecipeFreeze
+# StoreRecipeProduct
 > Gestion Produit Recette
 
 ## 📃 Description
