@@ -18,7 +18,7 @@ git clone  https://github.com/flormich/StoreRecipeFreeze
 
 <br>
 <p align="center">
- <img src="https://github.com/flormich/StoreFreezeSimple/blob/master/ressources/StoreRecipeFreeze.JPG">
+ <img src="https://github.com/flormich/StoreRecipeFreeze/blob/master/ressources/StoreRecipeFreeze.JPG">
 <br><br>
 </p>
 

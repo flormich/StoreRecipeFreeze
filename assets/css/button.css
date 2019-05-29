@@ -11,6 +11,24 @@
     text-transform: initial;
 }
 
+.bigButton {
+    background: #22ABE8;
+    width: 80%;
+    height: 10rem;
+    color: snow;
+    font-size: 250%;
+    text-transform: initial;
+}
+
+.middleButton {
+    background: #22ABE8;
+    width: 60%;
+    height: 10rem;
+    color: snow;
+    font-size: 170%;
+    text-transform: initial;
+}
+
 .mdl-button--myColorCancel {
     background:#DC2C69;
     color: snow;

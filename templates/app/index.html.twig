@@ -11,9 +11,50 @@
 
 {% block main %}
     {% include 'baseOpen.html.php' %}
-<p class="h2 col-12">
-    {{ 'title.app'|trans }}
-</p>
+        <div class="backgroundCreate heightMoy">
+    {# <p class="h2 col-12">
+        {{ 'title.app'|trans }}
+    </p> #}
+            <br><br><center>
+                <h3><b><u>Produits dans mon congélateur</u></b></h3>
+                <br>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate bigButton" type="submit">
+                    <a href="readStore" style="color:white; text-decoration:none">Voir produit</a>
+                </button>
+                <br><br>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate middleButton" type="submit">
+                    <a href="createStore" style="color:white; text-decoration:none">Ajouter produit</a>
+                </button>
+        </div>
+
+        <br><br><br><br><br>
+
+        <div class="backgroundRed heightMoy">
+            <br><br><center>
+                <h3><b><u>Recettes</u></b></h3>
+                <br>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate bigButton" type="submit">
+                    <a href="readRecette" style="color:white; text-decoration:none">Voir recette</a>
+                </button>
+                <br><br>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate middleButton" type="submit">
+                    <a href="createRecette" style="color:white; text-decoration:none">Ajouter recette</a>
+                </button>
+        </div>
+
+
+        <div class="backgroundBlue heightMoy">
+            <br><br>
+                <h3><center><b><u>Encore un autre truc</b></u></h3>
+
+        </div>
+
+        <div class="backgroundGrey heightPet">
+            <br><br>
+                <h4><center><b>Pied de page</b></h4>
+
+        </div>
+
     {% include 'baseClose.html.php' %}
 
 {% endblock %}

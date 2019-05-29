@@ -22,6 +22,9 @@ input, textarea, select
     border-radius:4px;
     width:15rem;
     box-shadow:1px 1px 2px #C0C0C0 inset;
+
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
 }
 
 textarea
@@ -76,5 +79,5 @@ input[type=submit], input[type=reset]
 
 button
 {
-    width: 11rem;
+    width: 15rem;
 }

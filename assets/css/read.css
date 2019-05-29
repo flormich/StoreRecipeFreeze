@@ -4,7 +4,7 @@
 }
 
 .thTab {
-    width: 80px;
+    width: 90px;
     color: rgb(172, 27, 27);
 }
 
@@ -17,7 +17,7 @@
 }
 
 .heightCellule {
-    height: 1rem;
+    height: 1.2rem;
 }
 
 .borderRadius {
@@ -86,9 +86,8 @@ th {
     background-color: rgba(34, 171, 232, 0.3);
     color: black;
     text-shadow: 4px 4px 2px grey;
-    width: 7em;
-    padding-left: 1em;
-    padding-right: 1em;
+    /* padding-left: 1em;
+    padding-right: 1em; */
     height: 2.5rem;
 }
 

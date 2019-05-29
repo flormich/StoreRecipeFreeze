@@ -2,7 +2,7 @@ var Encore = require('@symfony/webpack-encore');
 
 Encore
     .setOutputPath('public/build/')
-    .setPublicPath('/StoreFreeze3/StoreFreeze/public/build')
+    .setPublicPath('/StoreFreeze3/StoreRecipeFreeze/public/build')
     .addEntry('app', './assets/js/app.js')
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()

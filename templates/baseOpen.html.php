@@ -23,7 +23,10 @@
     <div class="mdl-layout__header-row ">
       <!-- Title -->
       <span class="mdl-layout-title">
-      <a class="mdl-navigation__link" href="index"><img src= "../assets/pictures/icones/UrgenceEmploi.jpg" alt="StoreFreeze" width="25%"></a>
+
+      <!-- <a class="mdl-navigation__link" href="index"><img src= "../assets/pictures/icones/UrgenceEmploi.jpg" alt="StoreFreeze" width="25%"></a>-->
+      <a class="mdl-navigation__link bandoIconeStoreFreeze" href="index"><img src="../assets/images/icone/StoreFreeze.jpg" alt="StoreFreeze" width="9%"></a>
+
       </span>
       <!-- Add spacer, to align navigation to the right -->
 
@@ -47,40 +50,46 @@
       <!-- Navigation. We hide it in small screens. -->
       <nav class="mdl-navigation mdl-layout--large-screen-only">
        <!-- <a class="mdl-navigation__link" href="utilisateur">Utilisateur</a> -->
-        <a class="mdl-navigation__link" href="readRecette">Les recettes</a>
-        <a class="mdl-navigation__link" href="readStore">Stock Freezer</a>
+       <!-- <a class="mdl-navigation__link" href="readRecette">Les recettes</a> -->
+        <a class="mdl-navigation__link" href="readStore"><img src="../assets/images/icone/glacons.jpg" width="12%">Produit dans le congèle</a>
         <!-- <a class="mdl-navigation__link" href="showCv">Voir CV</a>
         <a class="mdl-navigation__link" href="newCv">Créer CV</a> -->
 
       <!-- Right aligned menu below button -->
-<button id="demo-menu-lower-right"
+<!-- <button id="demo-menu-lower-right"
         class="mdl-button mdl-js-button mdl-button--icon">
   <i class="material-icons">more_vert</i>
 </button>
-
+-->
+<!--
 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
     for="demo-menu-lower-right">
   <a class="mdl-menu__item" href="new">S'inscrire</a>
   <a class="mdl-menu__item" href="login">Se connecter</a>
   <a class="mdl-menu__item" href="logout">Se déconnecter</a>
 </ul>
+-->
       </nav>
     </div>
   </header>
+  
+  
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">
     </span>
-    <nav class="mdl-navigation">
-    <a class="mdl-navigation__link" href="index"><img src= "../assets/pictures/icones/UrgenceEmploi.jpg" alt="UrgencEmploi" width="70%"></a>
+    <nav class="mdl-navigation menuLeft">
+    <a class="mdl-navigation__link" href="index"><img src="../assets/images/icone/StoreFreeze.jpg" alt="StoreFreeze" width="50%"></a>
     <br>
-    <a class="mdl-navigation__link" href="readRecette">Les recettes</a>
-        <a class="mdl-navigation__link" href="readStore">Stock Freezer</a>
-        <!-- <a class="mdl-navigation__link" href="showCv">Voir CV</a> -->
-        <!-- <a class="mdl-navigation__link" href="newCv">Créer CV</a> -->
+      <!--<a class="mdl-navigation__link" href="readRecette">Les recettes</a>-->
+        <a class="mdl-navigation__link" href="readStore"><br><img src="../assets/images/icone/glacons.jpg" width="40%"><br>Produits dans le congèle</a>
       <br><br>
+      
+      <!--
       <a class="mdl-navigation__link" href="new">S'inscrire</a>
       <a class="mdl-navigation__link" href="login">Se connecter</a>
       <a class="mdl-navigation__link" href="logout">Se déconnecter</a>
+      -->
+
     </nav>
   </div>
   <main class="mdl-layout__content">
