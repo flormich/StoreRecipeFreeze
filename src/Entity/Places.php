@@ -26,11 +26,6 @@ class Places
      */
     private $drawers;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Stock", inversedBy="id_lieux")
-     */
-    private $stock;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -56,18 +51,6 @@ class Places
     public function setDrawers(?int $drawers): self
     {
         $this->drawers = $drawers;
-
-        return $this;
-    }
-
-    public function getStock(): ?Stock
-    {
-        return $this->stock;
-    }
-
-    public function setStock(?Stock $stock): self
-    {
-        $this->stock = $stock;
 
         return $this;
     }

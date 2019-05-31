@@ -4,46 +4,44 @@
 
 {% block body_id %}app{% endblock %}
 
-{% block header %}
-
-{% endblock %}
+{% block header %}{% endblock %}
 
 {% block main %}
     {% include 'baseOpen.html.php' %}
-<div class="backgroundCreate">
+    <div class="backgroundCreate">
 
-    <div class="mdl-tabs__tab-bar">
-        <a class="mdl-navigation__link mdl-tabs__tab" href="createStore">Ajouter Produits</a>
-        <a class="mdl-navigation__link mdl-tabs__tab" href="readStore">Voir Produits</a>
-    </div>
-
-    <section class="paragraphe subtitle read ">
-        <div class="black">
-            <h3>Produits dans le Congélateur</h3>
+        <div class="mdl-tabs__tab-bar">
+            <a class="mdl-navigation__link mdl-tabs__tab" href="createStore">Ajouter Produits</a>
+            <a class="mdl-navigation__link mdl-tabs__tab" href="readStore">Voir Produits</a>
         </div>
-        <div>
-            <nav>
-                <table class="leftMenu">
-                    <thead>
-                        <th class="captionTrie pointerRead borderTrue" onclick="document.location='{{ path('readStore') }}'">Trier par catégorie</th>
-                    </thead>
-                    <tbody>
-                        {% for category in categories %}
-                        <tr>
-                            <td class="pointerRead borderTrue textShadow" onclick="document.location='{{ path('showProductCategory', 
-                            {'name':category.name}) }}'">
-                            {{ category.name }}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-{# </table> #}
+
+        <section class="paragraphe subtitle read ">
+            <div class="black">
+                <h3>Les Produits</h3>
+            </div>
+            <div>
+                <nav>
+                    <table class="leftMenu">
+                        <thead>
+                            <th class="captionTrie pointerRead borderTrue" onclick="document.location='{{ path('readStore') }}'">Trier par catégorie</th>
+                        </thead>
+                        <tbody>
+                            {% for category in categories %}
+                            <tr>
+                                <td class="pointerRead borderTrue textShadow" onclick="document.location='{{ path('showProductCategory', 
+                                {'name':category.name}) }}'">
+                                {{ category.name }}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
                     <tr>
                         <td>
                             <br><br><br>
                         </td>
                     </tr>
-{# <table> #}
+
                     <thead>
                         <th class="captionTrie pointerRead borderTrue" onclick="document.location='{{ path('readStore') }}'">Trier par nom</th>
                     </thead>
@@ -73,9 +71,11 @@
                     <tbody class="pointerRead">
                         <tr>
                             <th rowspan="2" class="thTab borderTrue" onclick="document.location='showProductNameAsc'">Nom du produit</th>
+                            <th rowspan="2" class="thTab borderTrue">Photos</th>
                             <th rowspan="2" class="thTab borderTrue" onclick="document.location='showProductCatAsc'">Catégorie</th>
                             <th rowspan="2" class="thTab borderTrue">Quantité en Unité</th>
                             <th rowspan="2" class="thTab borderTrue">Quantité en Gramme</th>
+                            <th rowspan="2" class="thTab borderTrue">DLC</th>
                             <th rowspan="2" class="thTab borderTrue" onclick="document.location='showProductTirAsc'">Congélateur</th>
                             <th colspan ="4">Intéragir</th>
                         </tr>
@@ -94,6 +94,11 @@
                                         {{ product.name }}
                                     {# <td>{{ product.name }}</td> #}
                                     </td>
+                                    <td class="ponterRead borderTrue">
+                                        {% if product.name == product.name %}
+                                            <img src="../assets/images/products/{{product.name}}.jpg" width='90%' />
+                                        {% endif %}
+                                    </td>    
                                     <td class="pointerRead borderTrue" onclick="document.location='{ path('showProductCategory',
                                         {'name':product.Category.name}) }}'">
                                         {{ product.Category.name }}
@@ -101,6 +106,7 @@
                                     {# <td>{{ product.Category.name }}</td>    #}
                                     <td class="borderTrue">{{ product.quantityUnit.unitaire }}</td>                                 
                                     <td class="borderTrue">{{ product.quantityGr.gram }}</td> 
+                                    <td class=" borderTrue">{{ product.dlc }}</td>
                                     <td class="borderTrue">{{ product.Freezer.name|default('') }}</td>
                                     {# <td>{{ product.Freezer.drawer|default('') }}</td> #}
 

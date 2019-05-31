@@ -4,8 +4,13 @@
 }
 
 .bandoIconeStoreFreeze {
-    width: 65rem;
+    width: 45rem;
 }
+
+.bandoIconeStoreProduct {
+    width: 11rem;
+}
+
 
 .red {
     color : #DC2C69;
@@ -78,4 +83,14 @@
 .menuLeft {
     /* margin: auto; */
     text-align: center;
+    /* margin: 0 0 0 0; */
+    /* padding-top: 5px;
+    padding-bottom: 5px; */
+    padding: 1rem 0 0.5rem 0;
+}
+
+hr {
+    align-content: center;
+    width: 75%;
+    margin: auto;
 }

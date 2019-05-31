@@ -36,18 +36,21 @@ class RecipeRegisterType extends AbstractType
                 ],
             ])
 
-            ->add('numberPeople', IntegerType::class, [
-                "label" => "Nombre de personne",
+            ->add('quantityGram', IntegerType::class, [
+                "label" => "Quanitté en Gramme",
+                "required" => false,
                 "attr" => [
-                    'placeholder' => 'Nombre de personne'],
-                "constraints" => [
-                    new Regex([
-                        "pattern" => "/[0-9]/u",
-                        "message" => "Erreur sur le nombre",
-                    ]),
-                ],
+                    'placeholder' => 'Quantité en Gramme'],
             ])
 
+            ->add('quantityUnit', IntegerType::class, [
+                "label" => "Quantité Unitaire",
+                "required" => false,
+                "attr" => [
+                    'placeholder' => 'Quantité Unitaire'
+                ],
+            ])
+            
             ->add('timePrepa', TimeType::class, [
                 "label" => "Tps de préparation",
                 "attr" => [
@@ -60,7 +63,7 @@ class RecipeRegisterType extends AbstractType
                 // ],
             ])
 
-            ->add('timeBaking', TimeType::class, [
+            ->add('timeCook', TimeType::class, [
                 "label" => "Tps de cuisson",
                 "attr" => [
                     'placeholder' => 'Tps de cuisson'],
@@ -76,19 +79,6 @@ class RecipeRegisterType extends AbstractType
                 "label" => "Détail",
                 "attr" => [
                     'placeholder' => 'Détail'],
-            ])
-
-            
-            ->add('page', IntegerType::class, [
-                "label" => "Numéro de page",
-                "attr" => [
-                    'placeholder' => 'Numéro de page'],
-                "constraints" => [
-                    new Regex([
-                        "pattern" => "/[0-9]/u",
-                        "message" => "Erreur indiquer un nombre",
-                    ])
-                ],
             ])
         ;
     }

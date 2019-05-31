@@ -36,17 +36,12 @@ class Stock
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Places", mappedBy="stock")
      */
-    private $id_lieux;
+    private $place;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="stock")
      */
     private $id_product;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CommandeStock", mappedBy="id_stock")
-     */
-    private $commandeStocks;
 
     public function __construct()
     {
@@ -96,36 +91,35 @@ class Stock
         return $this;
     }
 
-    /**
-     * @return Collection|Places[]
-     */
-    public function getIdLieux(): Collection
+    public function getPlaces(): ?string
     {
-        return $this->id_lieux;
+        return $this->place;
     }
 
-    public function addIdLieux(Places $idLieux): self
+    public function setPlaces(?string $place): self
     {
-        if (!$this->id_lieux->contains($idLieux)) {
-            $this->id_lieux[] = $idLieux;
-            $idLieux->setStock($this);
-        }
+        $this->place = $place;
 
         return $this;
     }
 
-    public function removeIdLieux(Places $idLieux): self
-    {
-        if ($this->id_lieux->contains($idLieux)) {
-            $this->id_lieux->removeElement($idLieux);
-            // set the owning side to null (unless already changed)
-            if ($idLieux->getStock() === $this) {
-                $idLieux->setStock(null);
-            }
-        }
+    // /**
+    //  * @return Collection|Places[]
+    //  */
+    // public function getPlaces(): Collection
+    // {
+    //     return $this->places;
+    // }
 
-        return $this;
-    }
+    // public function addPlaces(Places $places): self
+    // {
+    //     if (!$this->places->contains($places)) {
+    //         $this->places[] = $places;
+    //         $places->setStock($this);
+    //     }
+
+    //     return $this;
+    // }
 
     /**
      * @return Collection|Product[]
@@ -152,37 +146,6 @@ class Stock
             // set the owning side to null (unless already changed)
             if ($idProduct->getStock() === $this) {
                 $idProduct->setStock(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|CommandeStock[]
-     */
-    public function getCommandeStocks(): Collection
-    {
-        return $this->commandeStocks;
-    }
-
-    public function addCommandeStock(CommandeStock $commandeStock): self
-    {
-        if (!$this->commandeStocks->contains($commandeStock)) {
-            $this->commandeStocks[] = $commandeStock;
-            $commandeStock->setIdStock($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommandeStock(CommandeStock $commandeStock): self
-    {
-        if ($this->commandeStocks->contains($commandeStock)) {
-            $this->commandeStocks->removeElement($commandeStock);
-            // set the owning side to null (unless already changed)
-            if ($commandeStock->getIdStock() === $this) {
-                $commandeStock->setIdStock(null);
             }
         }
 

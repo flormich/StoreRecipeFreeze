@@ -2,25 +2,25 @@
 
 namespace App\Controller;
 
-use App\Entity\Freezer;
+use App\Entity\Stock;
+use App\Entity\Places;
 use App\Entity\Product;
-use App\Entity\Category;
-use App\Entity\PictureProduct;
 
-use App\Form\StoreRegisterType;
-use App\Form\QuantityGrRegisterType;
+use App\Entity\PictureProduct;
+use App\Entity\CategoryProduct;
+use App\Form\StockRegisterType;
 use Symfony\Component\Form\Form;
+use App\Form\PictureRegisterType;
+use App\Form\ProductRegisterType;
+use App\Form\QuantityGrRegisterType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\QuantityUnit;
-use App\Entity\QuantityGr;
-
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use App\Form\PictureRegisterType;
 use Symfony\Component\Console\Logger\ConsoleLogger;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class StoreController extends AbstractController
 {
@@ -42,11 +42,11 @@ class StoreController extends AbstractController
     //     ]);
     // }
 
-    private function addCategory(Form $form): Form
+    private function addCategoryProduct(Form $form): Form
     {
-        return $form->add("Category", EntityType::Class, [
-            "label" => "Categories",
-            "class" => Category::Class,
+        return $form->add("CategoryProduct", EntityType::Class, [
+            "label" => "Categories du produit",
+            "class" => CategoryProduct::Class,
             "choice_label" => "name",
             "expanded" => false,
             "multiple" => false,
@@ -54,17 +54,30 @@ class StoreController extends AbstractController
         ]);
     }
 
-    private function addFreezer(Form $form): Form
+    private function addStock(Form $form): Form
     {
-        return $form->add("Freezer", EntityType::Class, [
-            "label" => "Emplacement congélateur",
-            "class" => Freezer::Class,
+        return $form->add("Stock", EntityType::Class, [
+            "label" => "Quantité",
+            "class" => Stock::Class,
             "choice_label" => "name",
             "expanded" => false,
             "multiple" => false,
             "required" => true,
         ]);
     }
+
+    private function addPlaces(Form $form): Form
+    {
+        return $form->add("Places", EntityType::class, [
+            "label" => "Emplacement",
+            "class" => Places::class,
+            "choice_label" => "name",
+            "expanded" => false,
+            "multiple" => false,
+            "required" => true,
+        ]);
+    }
+
 
     /**
      * @Route("/createStore", name="createStore")
@@ -97,9 +110,13 @@ class StoreController extends AbstractController
         // else 
         // {
             $createStore = new Product();
-            $form = $this->createForm(StoreRegisterType::class, $createStore);
-            $this->addCategory($form);
-            $this->addFreezer($form);
+            $form = $this->createForm(ProductRegisterType::class, $createStore);
+            $this->addCategoryProduct($form);
+
+            $createStock = new Stock();            
+            $form2 = $this->createForm(StockRegisterType::class, $createStock);
+            $this->addPlaces($form2);
+            // $this->addStock($form);
             // $createStore->setPictureProduct($createPicture);       
     
             $form->handleRequest($request);
@@ -107,6 +124,7 @@ class StoreController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($createStore);
+                $em->persist($createStock);
                 // $em->persist($createPicture);
                 $em->flush();
     
@@ -119,7 +137,7 @@ class StoreController extends AbstractController
  
         return $this->render('store/create.html.twig', [
             'form' => $form->createView(),
-            // 'form2' => $form2->createView(),
+            'form2' => $form2->createView(),
         ]);
     }
  
@@ -164,7 +182,7 @@ class StoreController extends AbstractController
     public function readStore(Request $request)
     {
         $products = $this->getDoctrine()->getManager()->getRepository(Product::class)->findBy([], ['name'=>'ASC']);
-        $categories = $this->getDoctrine()->getManager()->getRepository(Category::class)->findBy([], ['name'=>'ASC']);
+        $categories = $this->getDoctrine()->getManager()->getRepository(CategoryProduct::class)->findBy([], ['name'=>'ASC']);
         $productsAsc = $this->getDoctrine()->getManager()->getRepository(Product::class)->findBy([],['name' => 'ASC']);
         // $picture = $this->getDoctrine()->getManager()->getRepository(PictureProduct::class)->findAll();
 
@@ -198,7 +216,7 @@ class StoreController extends AbstractController
      */
     public function showProductCategory(Request $request)
     {
-        $categories = $this->getDoctrine()->getManager()->getRepository(Category::class)->findBy([], ['name'=>'ASC']);
+        $categories = $this->getDoctrine()->getManager()->getRepository(CategoryProduct::class)->findBy([], ['name'=>'ASC']);
         $productsAsc = $this->getDoctrine()->getManager()->getRepository(Product::class)->findBy([],['name' => 'ASC']);
 
         $request = Request::createFromGlobals();
@@ -229,7 +247,7 @@ class StoreController extends AbstractController
         $valeur = $request->query->get('name');
 
         $productName = $this->getDoctrine()->getManager()->getRepository(Product::class)->findBy(['name' => $valeur]);
-        $categories = $this->getDoctrine()->getManager()->getRepository(Category::class)->findBy([], ['name' => 'ASC']);
+        $categories = $this->getDoctrine()->getManager()->getRepository(CategoryProduct::class)->findBy([], ['name' => 'ASC']);
         $productsAsc = $this->getDoctrine()->getManager()->getRepository(Product::class)->findBy([],['name' => 'ASC']);
 
         return $this->render('store/read.html.twig', [
@@ -392,7 +410,7 @@ class StoreController extends AbstractController
     public function showProductNameAsc()
     {
         $products = $this->getDoctrine()->getManager()->getRepository(Product::class)->findBy([],['name' => 'ASC']);
-        $categories = $this->getDoctrine()->getManager()->getRepository(Category::class)->findBy([], ['name'=>'ASC']);
+        $categories = $this->getDoctrine()->getManager()->getRepository(CategoryProduct::class)->findBy([], ['name'=>'ASC']);
         $productsAsc = $this->getDoctrine()->getManager()->getRepository(Product::class)->findBy([],['name' => 'ASC']);
 
         return $this->render('store/read.html.twig', [
@@ -408,7 +426,7 @@ class StoreController extends AbstractController
     public function showProductCatAsc()
     {
         $products = $this->getDoctrine()->getManager()->getRepository(Product::class)->findBy([], ['category' => 'ASC', 'name' => 'ASC']);
-        $categories = $this->getDoctrine()->getManager()->getRepository(Category::class)->findBy([], ['name' => 'ASC']);
+        $categories = $this->getDoctrine()->getManager()->getRepository(CategoryProduct::class)->findBy([], ['name' => 'ASC']);
         $productsAsc = $this->getDoctrine()->getManager()->getRepository(Product::class)->findBy([],['name' => 'ASC']);
 
         return $this->render('store/read.html.twig', [
@@ -424,7 +442,7 @@ class StoreController extends AbstractController
     public function showProductTirAsc()
     {
         $products = $this->getDoctrine()->getManager()->getRepository(Product::class)->findBy([],['freezer' => 'ASC', 'name' => 'ASC']);
-        $categories = $this->getDoctrine()->getManager()->getRepository(Category::class)->findBy([], ['name' => 'ASC']);
+        $categories = $this->getDoctrine()->getManager()->getRepository(CategoryProduct::class)->findBy([], ['name' => 'ASC']);
         $productsAsc = $this->getDoctrine()->getManager()->getRepository(Product::class)->findBy([],['name' => 'ASC']);
  
         return $this->render('store/read.html.twig', [

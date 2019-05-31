@@ -27,24 +27,40 @@
                     class: "row"
                 }
             }) }}
+
             {{ form_start(form2, {
             attr: {
                 novalidate: "novalidate",
                 class: "row"
             }
             }) }}
+
             <div class="border col-12 col-lg6">
+                <table>
+                    <br><br>
+                    <tr>
+                        <td>
+                            {{ form_row(form.name) }}
+                        </td>
+                        <td>
+                            {{ form_row(form.CategoryProduct) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br>
+                            {{ form_row(form2.quantityGram) }}
+                        </td>
+                        <td>
+                            <br>
+                            {{ form_row(form2.quantityUnit) }}
+                        </td>
+                    </tr>
+                </table>                
+                <br><br>
+                {{ form_row(form2.dlc) }}
                 <br>
-                {{ form_row(form.name) }}
-                <br>
-                {{ form_row(form.Category) }}
-                <br>
-                {# {{ form_row(form.quantityGr )}} #}
-                {{ form_row(form2.gram) }}
-                <br>
-                {{ form_row(form.QuantityUnit) }}
-                <br>
-                {{ form_row(form.Freezer) }}
+                {{ form_row(form2.Places)}}
                 <br>
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit">Valider</button>
                 <br>

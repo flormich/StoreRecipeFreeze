@@ -65,12 +65,12 @@ class Product
         return $this;
     }
 
-    public function getIdCategoryProduct(): ?CategoryProduct
+    public function getCategoryProduct(): ?CategoryProduct
     {
         return $this->id_CategoryProduct;
     }
 
-    public function setIdCategoryProduct(?CategoryProduct $id_CategoryProduct): self
+    public function setCategoryProduct(?CategoryProduct $id_CategoryProduct): self
     {
         $this->id_CategoryProduct = $id_CategoryProduct;
 
@@ -114,19 +114,6 @@ class Product
         if (!$this->productRecettes->contains($productRecette)) {
             $this->productRecettes[] = $productRecette;
             $productRecette->setIdProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProductRecette(ProductRecette $productRecette): self
-    {
-        if ($this->productRecettes->contains($productRecette)) {
-            $this->productRecettes->removeElement($productRecette);
-            // set the owning side to null (unless already changed)
-            if ($productRecette->getIdProduct() === $this) {
-                $productRecette->setIdProduct(null);
-            }
         }
 
         return $this;

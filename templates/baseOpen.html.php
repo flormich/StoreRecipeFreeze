@@ -25,7 +25,7 @@
       <span class="mdl-layout-title">
 
       <!-- <a class="mdl-navigation__link" href="index"><img src= "../assets/pictures/icones/UrgenceEmploi.jpg" alt="StoreFreeze" width="25%"></a>-->
-      <a class="mdl-navigation__link bandoIconeStoreFreeze" href="index"><img src="../assets/images/icone/StoreFreeze.jpg" alt="StoreFreeze" width="9%"></a>
+      <a class="mdl-navigation__link bandoIconeStoreFreeze" href="index"><img src="../assets/images/icone/StoreFreeze.jpg" alt="StoreFreeze" width="12%" title="Accueil">&nbsp Accueil</a>
 
       </span>
       <!-- Add spacer, to align navigation to the right -->
@@ -49,9 +49,10 @@
 
       <!-- Navigation. We hide it in small screens. -->
       <nav class="mdl-navigation mdl-layout--large-screen-only">
-       <!-- <a class="mdl-navigation__link" href="utilisateur">Utilisateur</a> -->
-       <!-- <a class="mdl-navigation__link" href="readRecette">Les recettes</a> -->
-        <a class="mdl-navigation__link" href="readStore"><img src="../assets/images/icone/glacons.jpg" width="12%">Produit dans le congèle</a>
+        <a class="mdl-navigation__link bandoIconeStoreProduct" href="readStore"><img src="../assets/images/icone/product.jpg" width="40%" title="Produits">&nbsp Produits</a>
+        <a class="mdl-navigation__link bandoIconeStoreProduct" href="readRecette"><img src="../assets/images/icone/cookbook.jpg" width="40%" title="Recettes">&nbsp Recettes</a>&nbsp &nbsp
+        <a class="mdl-navigation__link bandoIconeStoreProduct" href="readOrder"><img src="../assets/images/icone/shopping.png" width="40%" title="Commander">&nbsp Commander</a>
+        
         <!-- <a class="mdl-navigation__link" href="showCv">Voir CV</a>
         <a class="mdl-navigation__link" href="newCv">Créer CV</a> -->
 
@@ -78,10 +79,11 @@
     <span class="mdl-layout-title">
     </span>
     <nav class="mdl-navigation menuLeft">
-    <a class="mdl-navigation__link" href="index"><img src="../assets/images/icone/StoreFreeze.jpg" alt="StoreFreeze" width="50%"></a>
-    <br>
-      <!--<a class="mdl-navigation__link" href="readRecette">Les recettes</a>-->
-        <a class="mdl-navigation__link" href="readStore"><br><img src="../assets/images/icone/glacons.jpg" width="40%"><br>Produits dans le congèle</a>
+    <a class="menuLeft" href="index"><img src="../assets/images/icone/StoreFreeze.jpg" width="70%" title="Accueil"></a>
+      <hr color="blue" size="10px">
+      <a class="menuLeft" href="readStore"><img src="../assets/images/icone/product.jpg" width="40%" title="Produits">
+      <a class="menuLeft" href="readRecette"><img src="../assets/images/icone/cookbook.jpg" width="40%" title="Recettes"></a></a>
+      <a class="menuLeft" href="readOrder"><img src="../assets/images/icone/shopping.png" width="40%" title="Commander"></a>
       <br><br>
       
       <!--

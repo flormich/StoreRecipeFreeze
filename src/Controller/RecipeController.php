@@ -4,13 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Book;
 use App\Entity\Page;
-use App\Entity\Plat;
 use App\Entity\Product;
 use App\Entity\Recette;
-use App\Entity\Category;
 use App\Entity\ProductRecette;
 
-use App\Form\PageRegisterType;
+use App\Entity\CategoryProduct;
+
+use App\Entity\CategoryRecette;
 use App\Form\StoreRegisterType;
 use App\Form\RecipeRegisterType;
 use Symfony\Component\Form\Form;
@@ -43,42 +43,9 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    private function addPlat(Form $form): Form
-    {
-        return $form->add("plat", EntityType::Class, [
-            "label" => "Plat",
-            "class" => Plat::Class,
-            "choice_label" => "Name",
-            "expanded" => false,
-            "multiple" => false,
-            "required" => true,
-        ]);
-    }
 
-    private function addBook(Form $form): Form
-    {
-        return $form->add("book", EntityType::Class, [
-            "label" => "Book",
-            "class" => Book::Class,
-            "choice_label" => "Color",
-            "expanded" => false,
-            "multiple" => false,
-            "required" => true,
-        ]);
-    }
 
-    private function addProduct(Form $form): Form
-    {
-        return $form->add("product", EntityType::Class, [
-            "label" => "Product",
-            "class" => Product::Class,
-            "choice_label" => "name",
-            "expanded" => false,
-            "multiple" => true,
-            "required" => true,
-        ]);
-    }
-
+//TODO
     /**
      * @Route("/createRecette", name="createRecette")
      */
@@ -86,22 +53,22 @@ class RecipeController extends AbstractController
     {
         $createRecipe = new Recette();
         $form = $this->createForm(RecipeRegisterType::class, $createRecipe);
-        $this->addPlat($form);
-        $this->addBook($form);
+        // $this->addPlat($form);
+        // $this->addBook($form);
 
-        $createStore = new Product();
-        $form2 = $this->createForm(StoreRegisterType::class, $createStore);
+        // $createStore = new Product();
+        // $form2 = $this->createForm(StoreRegisterType::class, $createStore);
 
-        $productRecette = new ProductRecette();
-        $productRecette->setRecette($createRecipe);
+        // $productRecette = new ProductRecette();
+        // $productRecette->setRecette($createRecipe);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($createRecipe);
-            $em->persist($productRecette);
-            $em->persist($createStore);
+            // $em->persist($productRecette);
+            // $em->persist($createStore);
             $em->flush();
 
             $request->getSession()
@@ -111,7 +78,7 @@ class RecipeController extends AbstractController
         }
         return $this->render('recipe/create.html.twig', [
             'form' => $form->createView(),
-            'form2' => $form2->createView(),
+            // 'form2' => $form2->createView(),
         ]);
     }
 
@@ -121,9 +88,9 @@ class RecipeController extends AbstractController
     public function readRecette(Request $request)
     {
         $recettes = $this->getDoctrine()->getManager()->getRepository(Recette::class)->findAll();
-        $categories = $this->getDoctrine()->getManager()->getRepository(Category::class)->findAll();
+        $categories = $this->getDoctrine()->getManager()->getRepository(CategoryProduct::class)->findAll();
         $productRecettes = $this->getDoctrine()->getManager()->getRepository(ProductRecette::class)->findAll();
-        $plats = $this->getDoctrine()->getManager()->getRepository(Plat::class)->findAll();
+        $plats = $this->getDoctrine()->getManager()->getRepository(CategoryRecette::class)->findAll();
         
         return $this->render('recipe/read.html.twig', [
             'recettes' => $recettes,
@@ -133,16 +100,18 @@ class RecipeController extends AbstractController
         ]);
     }
 
-       /**
-    * @Route ("/readRecettePlat", name="readRecettePlat")
-    */
+
+//TODO
+    /**
+     * @Route ("/readRecettePlat", name="readRecettePlat")
+     */
     public function readRecettePlat(Request $request)
     {
         $request = Request::createFromGlobals();
         $valeur = $request->query->get('name');
  
-        $plats = $this->getDoctrine()->getManager()->getRepository(Plat::class)->findAll();
-        $categories = $this->getDoctrine()->getManager()->getRepository(Category::class)->findAll();
+        $plats = $this->getDoctrine()->getManager()->getRepository(CategoryRecette::class)->findAll();
+        $categories = $this->getDoctrine()->getManager()->getRepository(CategoryProduct::class)->findAll();
         $productRecettes = $this->getDoctrine()->getManager()->getRepository(ProductRecette::class)->findAll();
 
         $em = $this->getDoctrine()->getManager()->getRepository(Recette::class);
@@ -162,6 +131,8 @@ class RecipeController extends AbstractController
         ]);
     }
 
+
+//TODO
     /**
      * @Route("/deleteR/{id}", name="deleteRecipe")
      */
@@ -177,6 +148,8 @@ class RecipeController extends AbstractController
         return $this->render('app/message.html.twig');
     }
 
+
+//TODO
     /**
      * @Route("/updateR/{id}", name="updateRecipe")
      */
@@ -203,17 +176,19 @@ class RecipeController extends AbstractController
         ]);
     }
 
+
+//TODO
     /**
      * @Route("/showSpecRecipe/{id}", name="showSpecRecipe")
      */
-     public function showSpecRecipe(Recette $recette, Request $request)
-     {     
-         $recettes = $this->getDoctrine()->getManager()->getRepository(Recette::class)->findById($recette);
-         $productRecettes = $this->getDoctrine()->getManager()->getRepository(ProductRecette::class)->findAll();
+    public function showSpecRecipe(Recette $recette, Request $request)
+    {     
+        $recettes = $this->getDoctrine()->getManager()->getRepository(Recette::class)->findById($recette);
+        $productRecettes = $this->getDoctrine()->getManager()->getRepository(ProductRecette::class)->findAll();
  
-         return $this->render('recipe/showSpec.html.twig', [
-             'recettes' => $recettes,
-             'productRecettes' => $productRecettes,
-         ]);            
-     }
+        return $this->render('recipe/showSpec.html.twig', [
+            'recettes' => $recettes,
+            'productRecettes' => $productRecettes,
+        ]);            
+    }
 }

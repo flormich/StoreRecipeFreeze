@@ -31,4 +31,16 @@ import '../images/icone/Unvalidate.png';
 import '../images/icone/Validate.png';
 import '../images/icone/Home.png';
 import '../images/icone/Connexion.png';
+import '../images/icone/Commande.png';
+import '../images/icone/cookbook.png';
+import '../images/icone/cookbook.jpg';
+import '../images/icone/product.jpg';
+import '../images/icone/Connexion.png';
+import '../images/icone/home_house.png';
+import '../images/icone/accept_ok.png';
+import '../images/icone/add_insert.png';
+import '../images/icone/bar_chart.png';
+import '../images/icone/shopping.png';
+import '../images/icone/save_disk.png';
+import '../images/icone/Search.png';
 

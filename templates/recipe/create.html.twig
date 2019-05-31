@@ -27,40 +27,49 @@
                 class: "row"
             }
         }) }}
-        {{ form_start(form2, {
+
+        {# {{ form_start(form2, {
             attr: {
                 novalidate: "novalidate",
                 class: "row"
             }
-        }) }}
+        }) }} #}
+
         <div class="border col-12 col-lg6">
+            <table>
+                <br>
+                {{ form_row(form.name) }}
+                <br>
+                {# {{ form_row(form2.name) }} #}
+                <br>
+                <tr>
+                    <td>
+                    {{ form_row(form.quantityGram) }}
+                    </td>
+                    <td>
+                    {{ form_row(form.quantityUnit) }}
+                    </td>
+                </tr>
+            </table>
             <br>
-            {{ form_row(form.name) }}
-            <br>
-            {{ form_row(form2.name) }}
-            <br>
-            {# {{ form_row(form2.quantityGr) }} #}
-            <br>
-            {# {{ form_row(form2.quantityUnit) }} #}
-            <br>
-            {{ form_row(form.numberPeople) }}
-            <br>
-            {{ form_row(form.plat) }}
-            <br>
-            {{ form_row(form.book) }}
-            <br>
-            {{ form_row(form.page) }}
-            <br>
+            {# {{ form_row(form.numberPeople) }} #}
+            {# <br> #}
+            {# {{ form_row(form.plat) }} #}
+            {# <br> #}
+            {# {{ form_row(form.book) }} #}
+            {# <br> #}
+            {# {{ form_row(form.page) }} #}
+            {# <br> #}
             {{ form_row(form.timePrepa) }}
             <br>
-            {{ form_row(form.timeBaking) }}
+            {{ form_row(form.timeCook) }}
             <br>
             {{ form_row(form.description) }}
             <br>
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit">Valider</button>
             <br>
             {{ form_end(form) }}
-            {{ form_end(form2)}}
+            {# {{ form_end(form2)}} #}
             <br>
         </div>
         <br>
