@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Places;
+use App\Entity\Product;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\StockRepository")
@@ -36,7 +38,7 @@ class Stock
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Places", mappedBy="stock")
      */
-    private $place;
+    private $places;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="stock")
@@ -45,9 +47,11 @@ class Stock
 
     public function __construct()
     {
-        $this->id_lieux = new ArrayCollection();
+        // $this->id_lieux = new ArrayCollection();
         $this->id_product = new ArrayCollection();
-        $this->commandeStocks = new ArrayCollection();
+        // $this->places = new ArrayCollection();
+        // $this->places = $places;
+        // $this->commandeStocks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -91,14 +95,15 @@ class Stock
         return $this;
     }
 
+    
     public function getPlaces(): ?string
     {
-        return $this->place;
+        return $this->places;
     }
 
-    public function setPlaces(?string $place): self
+    public function setPlaces(?string $places): self
     {
-        $this->place = $place;
+        $this->places = $places;
 
         return $this;
     }
@@ -106,7 +111,7 @@ class Stock
     // /**
     //  * @return Collection|Places[]
     //  */
-    // public function getPlaces(): Collection
+    // public function getPlaces(): Places
     // {
     //     return $this->places;
     // }

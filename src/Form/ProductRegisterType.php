@@ -37,32 +37,6 @@ class ProductRegisterType extends AbstractType
                     ]),
                 ],
             ])
-            
-            
-
-            // ->add('quantityUnit', IntegerType::class, [
-            //     "label" => "Quantités Unitaires",
-            //     "attr" => [
-            //         'placeholder' => 'Quantités Unitaires'],
-            //     "constraints" => [
-            //         new Regex([
-            //             "pattern" => "/[0-9]/u",
-            //             "message" => "error.quantityUnit",
-            //         ]),
-            //     ],
-            // ])
-
-            // ->add('QuantityGr', IntegerType::class, [
-            //     "label" => "Quantités en Grammes",
-            //     "attr" => [
-            //         'placeholder' => 'Quantités en Grammes'],
-            //     "constraints" => [
-            //         new Regex([
-            //             "pattern" => "/[0-9]/u",
-            //             "message" => "error.quantityGr",
-            //         ]),
-            //     ],
-            // ])
         ;
     }
 

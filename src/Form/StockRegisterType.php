@@ -19,19 +19,7 @@ class StockRegisterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('quantityUnit', IntegerType::class, [
-                "label" => "Quantités Unitaires",
-                "attr" => [
-                    'placeholder' => 'Quantités Unitaires'],
-                "constraints" => [
-                    new Regex([
-                        "pattern" => "/[0-9]/u",
-                        "message" => "error.quantityUnit",
-                    ]),
-                ],
-            ])
-
+        $builder            
             ->add('quantityGram', IntegerType::class, [
                 "label" => "Quantités en Grammes",
                 "attr" => [
@@ -44,17 +32,28 @@ class StockRegisterType extends AbstractType
                 ],
             ])
 
+            ->add('quantityUnit', IntegerType::class, [
+                "label" => "Quantités Unitaires",
+                "attr" => [
+                    'placeholder' => 'Quantités Unitaires'],
+                "constraints" => [
+                    new Regex([
+                        "pattern" => "/[0-9]/u",
+                        "message" => "error.quantityUnit",
+                    ]),
+                ],
+            ])
+
             ->add('dlc', TextType::class, [
                 "label" => "Date Limite de Consommation",
                 "attr" => [
                     'placeholder' => 'Date limite de Consommation'],
                 "constraints" => [
-                    new NotBlank,
-                    new length([
-                        "min" => 2,
-                        "max" => 30,
-                        "minMessage" => "error.min.name",
-                        "maxMessage" => "error.max.name",
+                    new Regex([
+                        // "pattern" => "/^([0-3][0-9]})(/)([0-9]{2,2})(/)([0-3]{2,2})$/",
+                        // "pattern" => "/^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$/",
+                        "pattern" => "/^([0-3][0-9]) (/) ([0-9]{2} (/) ([2][0-2][0-9]{1,1,2})$/",
+                        "message" => "Mauvais format de date metter au format DD/MM/AAAA",
                     ]),
                 ],
             ])

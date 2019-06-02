@@ -88,7 +88,7 @@ class RecipeController extends AbstractController
     public function readRecette(Request $request)
     {
         $recettes = $this->getDoctrine()->getManager()->getRepository(Recette::class)->findAll();
-        $categories = $this->getDoctrine()->getManager()->getRepository(CategoryProduct::class)->findAll();
+        $categories = $this->getDoctrine()->getManager()->getRepository(CategoryProduct::class)->findBy([], ['name'=>'ASC']);
         $productRecettes = $this->getDoctrine()->getManager()->getRepository(ProductRecette::class)->findAll();
         $plats = $this->getDoctrine()->getManager()->getRepository(CategoryRecette::class)->findAll();
         

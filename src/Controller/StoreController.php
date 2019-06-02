@@ -5,21 +5,22 @@ namespace App\Controller;
 use App\Entity\Stock;
 use App\Entity\Places;
 use App\Entity\Product;
-
 use App\Entity\PictureProduct;
 use App\Entity\CategoryProduct;
+
 use App\Form\StockRegisterType;
-use Symfony\Component\Form\Form;
 use App\Form\PictureRegisterType;
 use App\Form\ProductRegisterType;
 use App\Form\QuantityGrRegisterType;
+
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Console\Logger\ConsoleLogger;
+
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class StoreController extends AbstractController
@@ -54,18 +55,6 @@ class StoreController extends AbstractController
         ]);
     }
 
-    private function addStock(Form $form): Form
-    {
-        return $form->add("Stock", EntityType::Class, [
-            "label" => "Quantité",
-            "class" => Stock::Class,
-            "choice_label" => "name",
-            "expanded" => false,
-            "multiple" => false,
-            "required" => true,
-        ]);
-    }
-
     private function addPlaces(Form $form): Form
     {
         return $form->add("Places", EntityType::class, [
@@ -78,103 +67,41 @@ class StoreController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/createStore", name="createStore")
      */
     public function createStore(Request $request)
     {
-        // $createPicture = new PictureProduct();
-        // $form2 = $this->createForm(PictureRegisterType::class, $createPicture);
+        $createStock = new Stock();            
+        $form2 = $this->createForm(StockRegisterType::class, $createStock);
+        $this->addPlaces($form2);
+        // $createStore->setPictureProduct($createPicture);     
 
-        // if (empty ($form2) )
-        // { 
-            // $createStore = new Product();
-            // $form = $this->createForm(StoreRegisterType::class, $createStore);
-            // $this->addCategory($form);
-            // $this->addFreezer($form);   
+        $createStore = new Product();
+        $form = $this->createForm(ProductRegisterType::class, $createStore);
+        $this->addCategoryProduct($form);
+        $createStore->setStock($createStock);
     
-            // $form->handleRequest($request);
+        $form->handleRequest($request);
+        $form2->handleRequest($request);
     
-            // if ($form->isSubmitted() && $form->isValid()) {
-            //     $em = $this->getDoctrine()->getManager();
-            //     $em->persist($createStore);
-            //     $em->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($createStock);
+            $em->persist($createStore);
+            $em->flush();
     
-            //     $request->getSession()
-            //         ->getFlashBag()
-            //         ->add('action', 'Enregistrement réussi');
-            //     return $this->render('app/message.html.twig');
-            // }       
-        // } 
-        // else 
-        // {
-            $createStore = new Product();
-            $form = $this->createForm(ProductRegisterType::class, $createStore);
-            $this->addCategoryProduct($form);
-
-            $createStock = new Stock();            
-            $form2 = $this->createForm(StockRegisterType::class, $createStock);
-            $this->addPlaces($form2);
-            // $this->addStock($form);
-            // $createStore->setPictureProduct($createPicture);       
-    
-            $form->handleRequest($request);
-    
-            if ($form->isSubmitted() && $form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($createStore);
-                $em->persist($createStock);
-                // $em->persist($createPicture);
-                $em->flush();
-    
-                $request->getSession()
+            $request->getSession()
                     ->getFlashBag()
                     ->add('action', 'Enregistrement réussi');
-                return $this->render('app/message.html.twig');
-            } 
-        // }
+            return $this->render('app/message.html.twig');
+        }
  
         return $this->render('store/create.html.twig', [
             'form' => $form->createView(),
             'form2' => $form2->createView(),
         ]);
     }
- 
-
-    // /**
-    //  * @Route("/createStore", name="createStore")
-    //  */
-    // public function createStore(Request $request)
-    // {
-    //     $createPicture = new PictureProduct();
-    //     $form2 = $this->createForm(PictureRegisterType::class, $createPicture);
-
-    //     $createStore = new Product();
-    //     $form = $this->createForm(StoreRegisterType::class, $createStore);
-    //     $this->addCategory($form);
-    //     $this->addFreezer($form);
-    //     $createStore->setPictureProduct($createPicture);
-
-    //     $form->handleRequest($request);
-
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $em = $this->getDoctrine()->getManager();
-    //         $em->persist($createStore);
-    //         $em->persist($createPicture);
-    //         $em->flush();
-
-    //         $request->getSession()
-    //             ->getFlashBag()
-    //             ->add('action', 'Enregistrement réussi');
-    //         return $this->render('app/message.html.twig');
-    //     }
-
-    //     return $this->render('store/create.html.twig', [
-    //         'form' => $form->createView(),
-    //         'form2' => $form2->createView(),
-    //     ]);
-    // }
 
     /**
      * @Route("/readStore", name="readStore")
@@ -184,6 +111,9 @@ class StoreController extends AbstractController
         $products = $this->getDoctrine()->getManager()->getRepository(Product::class)->findBy([], ['name'=>'ASC']);
         $categories = $this->getDoctrine()->getManager()->getRepository(CategoryProduct::class)->findBy([], ['name'=>'ASC']);
         $productsAsc = $this->getDoctrine()->getManager()->getRepository(Product::class)->findBy([],['name' => 'ASC']);
+        
+        // $places = $this->getDoctrine()->getManager()->getRepository(Places::class)->findAll();
+        // $stock = $this->getDoctrine()->getManager()>getRepository(Stock::class)->findAll();
         // $picture = $this->getDoctrine()->getManager()->getRepository(PictureProduct::class)->findAll();
 
  
@@ -192,9 +122,12 @@ class StoreController extends AbstractController
             'categories' => $categories,
             'productsAsc' => $productsAsc,
             // 'pictures' => $picture,
+            // 'places' => $places,
         ]);
     }
 
+
+//TODO
     // /**
     //  * @Route("/readStore", name="readStore")
     //  */
@@ -211,6 +144,7 @@ class StoreController extends AbstractController
     //     ]);
     // }
 
+//TODO
     /**
      * @Route ("/showProductCategory", name="showProductCategory")
      */
@@ -238,6 +172,7 @@ class StoreController extends AbstractController
         ]);
     }
 
+//TODO
     /**
      * @Route ("/showProductName", name="showProductName")
      */
@@ -257,6 +192,7 @@ class StoreController extends AbstractController
         ]);
     }
 
+//TODO
     // /**
     //  * @Route ("/showProductDrawer", name="showProductDrawer")
     //  */
@@ -276,6 +212,7 @@ class StoreController extends AbstractController
     //     ]);
     // }
 
+//TODO
     // /**
     //  * @Route("/showProduct", name="showProduct")
     //  */
@@ -290,6 +227,7 @@ class StoreController extends AbstractController
     //      ]);
     //  }
 
+//TODO
     /**
      * @Route("/deleteP/{id}", name="deleteProduct")
      */
@@ -305,6 +243,7 @@ class StoreController extends AbstractController
         return $this->render('app/message.html.twig');
     }
 
+//TODO
     /**
      * @Route("/updateP/{id}", name="updateProduct")
      */
@@ -331,6 +270,7 @@ class StoreController extends AbstractController
         ]);
     }
 
+//TODO
     /**
      * @Route("/changeAdd/{id}", name="changeProductAdd")
      */
@@ -368,6 +308,7 @@ class StoreController extends AbstractController
         ]);
     }
 
+//TODO
     /**
      * @Route("/changeMin/{id}", name="changeProductMin")
      */
@@ -404,6 +345,7 @@ class StoreController extends AbstractController
         ]);
     }
 
+//TODO
     /**
      * @Route("/showProductNameAsc", name="showProductNameAsc")
      */
@@ -420,6 +362,7 @@ class StoreController extends AbstractController
         ]);
     }
 
+//TODO
     /**
      * @Route("/showProductCatAsc", name="showProductCatAsc")
      */
@@ -436,6 +379,7 @@ class StoreController extends AbstractController
         ]);
     }
 
+//TODO
     /**
      * @Route("/showProductTirAsc", name="showProductTirAsc")
      */

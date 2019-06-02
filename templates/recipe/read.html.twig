@@ -16,9 +16,9 @@
         </div>
 
         <section class="paragraphe subtitle read">
-            <div class="black">
+            {# <div class="black">
                 <h3>Recettes</h3>
-            </div>
+            </div> #}
             {# menu de gauche #}
             <div>            
                 <nav>
@@ -43,66 +43,46 @@
                             </td>
                         </tr>
 
-                    <thead>
-                        <th class="captionTrie pointerRead borderTrue" onclick="document.location='{{ path('readStore') }}'">Trier par catégorie</th>
-                    </thead>
-                    <tbody>
-                    {% set newArray = [] %}
-                        {% for categorie in categories %}
-                            {% if product.Freezer.name|default is not empty %}
-                                {% if product.name not in newArray %}
-                                    <tr>
-                                        <td class="pointerRead borderTrue textShadow" onclick="document.location='{{ path('showProductName', 
-                                            {'name':product.name}) }}'">
-                                            {{ product.name }}
-                                        </td>
-                                    </tr>
-                                    {% set newArray = newArray|merge ([product.name]) %}
-                                {% endif %}
-                            {% endif %}
-                        {% endfor %}
-                    </tbody>
+                        <thead>
+                            <th class="captionTrie pointerRead borderTrue" onclick="document.location='{{ path('readStore') }}'">Trier par catégorie</th>
+                        </thead>
+                        <tbody>
+                            {% for category in categories %}
+                            <tr>
+                                <td class="pointerRead borderTrue textShadow" onclick="document.location='{{ path('showProductCategory', 
+                                {'name':category.name}) }}'">
+                                {{ category.name }}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
                     </table>
                 </nav>
             </div>
 
-       <div class="black">  
-            <div >
-                <table class="tableShowJob backgroundWhite borderTrue">
-                    <tbody class="pointerRead">
-                        <tr>
-                            <th rowspan="2" class="thTab borderTrue" onclick="document.location='showProductNameAsc'">Nom de la recete</th>
-                            <th rowspan="2" class="thTab borderTrue">Photos</th>
-                            <th rowspan="2" class="thTab borderTrue">Plats</th>
-                            <th rowspan="2" class="thTab borderTrue" onclick="document.location='showProductCatAsc'">Catégorie</th>
-                            <th rowspan="2" class="thTab borderTrue">Durée totale de préparation</th>
-                            <th rowspan="2" class="thTab borderTrue">Nombre d'ingrédient manquant</th>
-                            {# <th rowspan="2" class="thTab borderTrue">DLC</th> #}
-                            {# <th rowspan="2" class="thTab borderTrue" onclick="document.location='showProductTirAsc'">Congélateur</th> #}
-                            <th colspan ="2">Intéragir</th>
-                        </tr>
-                        <tr>
-                                <th class="thTab borderTrue">Modifier</th>
-                                <th class="thTab borderTrue">Supprimer</th>
-                        </tr>
+            <div class="black">
+                <h3>Recettes</h3>
+            </div>
 
-            {# <div class="black">
-                <div>
+            <div class="black">  
+                <div >
                     <table class="tableShowJob backgroundWhite borderTrue">
                         <tbody class="pointerRead">
                             <tr>
-                                <th rowspan="2" class="thTab borderTrue">Nom</th>
+                                <th rowspan="2" class="thTab borderTrue" onclick="document.location='showProductNameAsc'">Nom de la recete</th>
                                 <th rowspan="2" class="thTab borderTrue">Photos</th>
-                                <th rowspan="2" class="thTab borderTrue">Nombre de personne</th>                                
-                                <th rowspan="2" class="thTab borderTrue">Temps totals</th>
                                 <th rowspan="2" class="thTab borderTrue">Plats</th>
-                                <th rowspan="2" class="thTab borderTrue">Livres</th>
-                                <th rowspan="2" class="thTab borderTrue">Couleur du livre</th>
-                                <th rowspan="2" class="thTab borderTrue">Pages</th>
-                                <th rowspan="2" class="thTab borderTrue">Ingredients</th>
-                                <th colspan='4'>Interagir</th>
-                            </tr> #}
-
+                                <th rowspan="2" class="thTab borderTrue" onclick="document.location='showProductCatAsc'">Catégorie</th>
+                                <th rowspan="2" class="thTab borderTrue">Durée totale de préparation</th>
+                                <th rowspan="2" class="thTab borderTrue">Nombre d'ingrédient manquant</th>
+                                {# <th rowspan="2" class="thTab borderTrue">DLC</th> #}
+                                {# <th rowspan="2" class="thTab borderTrue" onclick="document.location='showProductTirAsc'">Congélateur</th> #}
+                                <th colspan ="2">Intéragir</th>
+                            </tr>
+                            <tr>
+                                <th class="thTab borderTrue">Modifier</th>
+                                <th class="thTab borderTrue">Supprimer</th>
+                            </tr>
                             
                             {% for recette in recettes %}
                             <tr onclick="document.location='{{ path('showSpecRecipe', {'id':recette.id}) }}'">

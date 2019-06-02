@@ -16,12 +16,14 @@
         </div>
 
         <section class="paragraphe subtitle read ">
-            <div class="black">
+            {# <div class="black">
                 <h3>Les Produits</h3>
-            </div>
+            </div> #}
             <div>
                 <nav>
                     <table class="leftMenu">
+
+                    {# Menu de gauche avec trie sur catégorie #}
                         <thead>
                             <th class="captionTrie pointerRead borderTrue" onclick="document.location='{{ path('readStore') }}'">Trier par catégorie</th>
                         </thead>
@@ -42,33 +44,47 @@
                         </td>
                     </tr>
 
+                    {# Menu de gauche avec trie sur les produits #}
                     <thead>
-                        <th class="captionTrie pointerRead borderTrue" onclick="document.location='{{ path('readStore') }}'">Trier par nom</th>
+                        <th class="captionTrie pointerRead borderTrue" onclick="document.location='{{ path('readStore') }}'">Trier par produit</th>
                     </thead>
                     <tbody>
                     {% set newArray = [] %}
-                        {% for product in products %}
-                            {% if product.Freezer.name|default is not empty %}
-                                {% if product.name not in newArray %}
+                        {% for productAsc in productsAsc %}
+                            {# {% if product.Freezer.name|default is not empty %} #}
+                                {% if productAsc.name not in newArray %}
                                     <tr>
                                         <td class="pointerRead borderTrue textShadow" onclick="document.location='{{ path('showProductName', 
-                                            {'name':product.name}) }}'">
-                                            {{ product.name }}
+                                            {'name':productAsc.name}) }}'">
+                                            {{ productAsc.name }}
                                         </td>
                                     </tr>
-                                    {% set newArray = newArray|merge ([product.name]) %}
+                                    {% set newArray = newArray|merge ([productAsc.name]) %}
                                 {% endif %}
-                            {% endif %}
+                            {# {% endif %} #}
                         {% endfor %}
                     </tbody>
+
+                    <tr>
+                        <td>
+                            <br><br><br>
+                        </td>
+                    </tr>
+
                 </table>
             </nav>
+        </div>
+
+        {# Titre de la page #}
+        <div class="black">
+            <h3>Les Produits</h3>
         </div>
 
         <div class="black">  
             <div >
                 <table class="tableShowJob backgroundWhite borderTrue">
                     <tbody class="pointerRead">
+                        {# Titre d'entête du tableau #}
                         <tr>
                             <th rowspan="2" class="thTab borderTrue" onclick="document.location='showProductNameAsc'">Nom du produit</th>
                             <th rowspan="2" class="thTab borderTrue">Photos</th>
@@ -86,59 +102,64 @@
                                 <th class="thTab borderTrue">Supprimer</th>
                         </tr>
 
-                        {% for product in products %}
-                            {% if product.Freezer.name|default is not empty %}
+                        {# Données à l'intérieur du tableau #}
+                        {% for products in products %}
+                            {# {% if product.Freezer.name|default is not empty %} #}
                                 <tr class="textShadow">                
                                     <td class="pointerRead borderTrue heightCellule" onclick="document.location='{{ path('showProductName',
-                                        {'name':product.name}) }}'">   
-                                        {{ product.name }}
+                                        {'name':products.name}) }}'">   
+                                        {{ products.name }}
                                     {# <td>{{ product.name }}</td> #}
                                     </td>
                                     <td class="ponterRead borderTrue">
-                                        {% if product.name == product.name %}
-                                            <img src="../assets/images/products/{{product.name}}.jpg" width='90%' />
+                                        {% if products.name == products.name %}
+                                            <img src="../assets/images/products/{{products.name}}.jpg" width='90%' />
                                         {% endif %}
                                     </td>    
-                                    <td class="pointerRead borderTrue" onclick="document.location='{ path('showProductCategory',
+                                    <td class="borderTrue">{{ products.CategoryProduct.name}}</td>
+                                    {# <td class="pointerRead borderTrue" onclick="document.location='{ path('showProductCategory',
                                         {'name':product.Category.name}) }}'">
-                                        {{ product.Category.name }}
-                                    </td>
+                                        {{ products.Category.name }}
+                                    </td> #}
                                     {# <td>{{ product.Category.name }}</td>    #}
-                                    <td class="borderTrue">{{ product.quantityUnit.unitaire }}</td>                                 
-                                    <td class="borderTrue">{{ product.quantityGr.gram }}</td> 
-                                    <td class=" borderTrue">{{ product.dlc }}</td>
-                                    <td class="borderTrue">{{ product.Freezer.name|default('') }}</td>
+                                    <td class="borderTrue">{{ products.stock.quantityUnit }}</td>                                 
+                                    <td class="borderTrue">{{ products.stock.quantityGram }}</td> 
+                                    <td class="borderTrue">{{ products.stock.dlc }}</td>
+                                    <td class="borderTrue"></td>
+                                    {# <td class="borderTrue">{{ products.stock.places.name }}</td> #}
+
+                                    {# <td class="borderTrue">{{ products.Freezer.name|default('') }}</td> #}
                                     {# <td>{{ product.Freezer.drawer|default('') }}</td> #}
 
-                                    {# change button #}
+                                    {# plus button #}
                                     <td class="borderTrue">                                    
-                                        <a class="mdl-list__item-secondary-action mdl-grid" href="{{ path('changeProduct', {'id':product.id}) }}" style="color:white; text-decoration:none">
+                                        <a class="mdl-list__item-secondary-action mdl-grid" href="{{ path('changeProductAdd', {'id':products.id}) }}" style="color:white; text-decoration:none">
                                             <i class="material-icons paragraphe">add_box</i>
                                         </a>                                        
                                     </td>
 
                                     {# minus button #}
                                     <td class="borderTrue">                                     
-                                        <a class="mdl-list__item-secondary-action mdl-grid" href="{{ path('changeProduct', {'id':product.id}) }}" style="color:white; text-decoration:none">
+                                        <a class="mdl-list__item-secondary-action mdl-grid" href="{{ path('changeProductMin', {'id':products.id}) }}" style="color:white; text-decoration:none">
                                             <i class="material-icons paragraphe">remove_circle</i>
                                         </a>
                                     </td>
 
                                     {# update button #}
                                     <td class="borderTrue">                                               
-                                        <a class="mdl-list__item-secondary-action mdl-grid" href="{{ path('updateProduct', {'id':product.id}) }}" style="color:white; text-decoration:none">
+                                        <a class="mdl-list__item-secondary-action mdl-grid" href="{{ path('updateProduct', {'id':products.id}) }}" style="color:white; text-decoration:none">
                                             <i class="material-icons paragraphe">edit</i>
                                         </a>                                        
                                     </td>
 
                                     {# delete button #}
                                     <td class="borderTrue">                                    
-                                        <a class="mdl-list__item-secondary-action mdl-grid" href="{{ path('deleteProduct', {'id':product.id}) }}" style="color:white; text-decoration:none">
+                                        <a class="mdl-list__item-secondary-action mdl-grid" href="{{ path('deleteProduct', {'id':products.id}) }}" style="color:white; text-decoration:none">
                                             <i class="material-icons paragraphe" onclick="if(!confirm('Confirmer la suppression du produit ?')) return false;">delete</i>
                                         </a>
                                     </td>
                                 </tr>
-                            {% endif %}
+                            {# {% endif %} #}
                         {% endfor %}                        
                     </tbody>
                 </table>
