@@ -79,55 +79,53 @@
                             <th colspan ="2" class="thTab borderTrue">Intéragir</th>
                         </tr>
                         <tr>
-                                <th class="thTab borderTrue">Produits</th>
-                                <th class="thTab borderTrue">Quantité en Gramme</th>
-                                <th class="thTab borderTrue">Quantité en Unité</th>
+                            <th class="thTab borderTrue">Produits</th>
+                            <th class="thTab borderTrue">Quantité en Gramme</th>
+                            <th class="thTab borderTrue">Quantité en Unité</th>
 
-                                <th class="thTab borderTrue">Modifier</th>
-                                <th class="thTab borderTrue">Supprimer</th>
+                            <th class="thTab borderTrue">Modifier</th>
+                            <th class="thTab borderTrue">Supprimer</th>
                         </tr>
 
-
-                            {% for recette in recettes %}
-                            <tr onclick="document.location='{{ path('showSpecRecipe', {'id':recette.id}) }}'">
-                                <td>{{ recette.name }}</td>
-                                <td></td>
-                                <td>{{ recette.numberPeople }}</td>                                
-                                <td><b>Prepa :</b> {{ recette.timePrepa|date('H:i:s') }} <br> <b>Cuiss :</b> {{ recette.timeBaking|date('H:i:s') }}</td>
-                                <td>{{ recette.plat.name }}</td>
-                                <td>{{ recette.book.name }}</td>
-                                <td>{{ recette.book.color }}</td>
-                                <td>{{ recette.page }}</td>
-                                <td><ul>
-                                {% for productRecette in productRecettes %}                                
-                                    {% if recette.id == productRecette.recette.id %}
-                                        <li>{{ productRecette.product.name }}<br></li>
-                                    {% endif %}                                   
-                                {% endfor %}
-                                </ul></td>
-                                        <td>
-                                        {# delete button #}
-                                            <br>
-                                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit">                                               
-                                                <a href="{{ path('deleteRecipe', {'id':recette.id}) }}" style="color:white; text-decoration:none" onclick="if(!confirm('Confirmer la suppression du produit ?')) return false;">Supprimer</a>
-                                            </button>
-                                            <br><br>
-                                        {# </td>
-                                        <br>
-                                        <td>            #}
-                                        {# update button #}
-                                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit"> 
-                                                <a href="{{ path('updateRecipe', {'id':recette.id}) }}" style="color:white; text-decoration:none">Modifier</a>
-                                            </button>
-                                            <br><br>
-                                        </td>
-                            </tr>
+                        {% for recette in recettes %}
+                        <tr  class="borderTrue" onclick="document.location='{{ path('showSpecRecipe', {'id':recette.id}) }}'">
+                            <td class="borderTrue">{{ recette.name }}</td>
+                            <td class="borderTrue"></td>
+                            {# <td>{{ recette.NumberPeople }}</td>                                 #}
+                            <td class="borderTrue"><b>Prepa :</b> {{ recette.timePrepa|date('H:i:s') }} <br> <b>Cuiss :</b> {{ recette.timeCook|date('H:i:s') }}</td>
+                            <td class="borderTrue">{{ recette.CategoryRecette.name }}</td>
+                            <td class="borderTrue">{{ recette.book.title }}</td>
+                            <td class="borderTrue">{{ recette.book.color }}</td>
+                            {# <td>{{ recette.Page }}</td> #}
+                            <td class="borderTrue"><ul>
+                            {% for productRecette in productRecettes %}                                
+                                {% if recette.id == productRecette.recette.id %}
+                                    <li>{{ productRecette.product.name }}<br></li>
+                                {% endif %}                                   
                             {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                <br>
+                            </ul></td>
+                            <td class="borderTrue">           
+                                {# update button #}
+                                <br>
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit"> 
+                                    <a href="{{ path('updateRecipe', {'id':recette.id}) }}" style="color:white; text-decoration:none">Modifier</a>
+                                </button>
+                                <br><br>
+                            </td>
+                            <td class="borderTrue">
+                                {# delete button #}
+                                <br>
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit">                                               
+                                    <a href="{{ path('deleteRecipe', {'id':recette.id}) }}" style="color:white; text-decoration:none" onclick="if(!confirm('Confirmer la suppression du produit ?')) return false;">Supprimer</a>
+                                </button>
+                                <br><br>
+                            </td>
+                        </tr>
+                            {% endfor %}
+                    </tbody>
+                </table>
             </div>
+            <br>            
             {% include 'baseClose.html.php' %}
         <section>
     </div>

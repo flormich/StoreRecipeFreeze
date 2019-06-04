@@ -38,10 +38,31 @@
         <div class="border col-12 col-lg6">
             <table>
                 <br>
-                {{ form_row(form.name) }}
+                <tr>
+                    <td>                    
+                    {{ form_row(form.name) }}
+                    </td>
+                    <td>
+                    {{ form_row(form.CategoryRecette) }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    {{ form_row(form.Book) }}
+                    </td>
+                    <td>
+                    {{ form_row(form.Page) }}
+                    </td>
+                </tr>
+            </table>
+                <td>
                 <br>
-                {# {{ form_row(form.name) }} #}
+                <hr>
+                <br>                
+                {{ form_row(form.NumberPeople) }}
                 <br>
+                </td>
+            <table>
                 <tr>
                     <td>
                     {{ form_row(form.quantityGram) }}
@@ -51,6 +72,8 @@
                     </td>
                 </tr>
             </table>
+            <br>
+            <hr>
             <br>
             {# {{ form_row(form.numberPeople) }} #}
             {# <br> #}
@@ -63,6 +86,8 @@
             {{ form_row(form.timePrepa) }}
             <br>
             {{ form_row(form.timeCook) }}
+            <br>
+            <hr>
             <br>
             {{ form_row(form.description) }}
             <br>

@@ -51,8 +51,8 @@ class RecipeRegisterType extends AbstractType
                 ],
             ])
             
-            ->add('timePrepa', TimeType::class, [
-                "label" => "Tps de préparation",
+            ->add('timePrepa', TextType::class, [
+                "label" => "Tps de préparation en Heures:Minutes",
                 "attr" => [
                     'placeholder' => 'Tps de préparation'],
                 // "constraints" => [
@@ -63,8 +63,8 @@ class RecipeRegisterType extends AbstractType
                 // ],
             ])
 
-            ->add('timeCook', TimeType::class, [
-                "label" => "Tps de cuisson",
+            ->add('timeCook', TextType::class, [
+                "label" => "Tps de cuisson en Heures:Minutes",
                 "attr" => [
                     'placeholder' => 'Tps de cuisson'],
                 // "constraints" => [
@@ -76,9 +76,9 @@ class RecipeRegisterType extends AbstractType
             ])
 
             ->add('description', TextareaType::class, [
-                "label" => "Détail",
+                "label" => "Préparation de la recette",
                 "attr" => [
-                    'placeholder' => 'Détail'],
+                    'placeholder' => 'Indiquer ici la démarche à suivre pour faire la recette'],
             ])
         ;
     }

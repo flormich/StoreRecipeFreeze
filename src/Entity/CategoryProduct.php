@@ -23,15 +23,15 @@ class CategoryProduct
      */
     private $name;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="id_CategoryProduct")
-     */
-    private $products;
+    // /**
+    //  * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="id_CategoryProduct")
+    //  */
+    // private $products;
 
-    public function __construct()
-    {
-        $this->products = new ArrayCollection();
-    }
+    // public function __construct()
+    // {
+    //     $this->products = new ArrayCollection();
+    // }
 
     public function getId(): ?int
     {
@@ -50,21 +50,21 @@ class CategoryProduct
         return $this;
     }
 
-    /**
-     * @return Collection|Product[]
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
+    // /**
+    //  * @return Collection|Product[]
+    //  */
+    // public function getProducts(): Collection
+    // {
+    //     return $this->products;
+    // }
 
-    public function addProduct(Product $product): self
-    {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
-            $product->setIdCategoryProduct($this);
-        }
+    // public function addProduct(Product $product): self
+    // {
+    //     if (!$this->products->contains($product)) {
+    //         $this->products[] = $product;
+    //         $product->setIdCategoryProduct($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }

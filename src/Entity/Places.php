@@ -21,10 +21,10 @@ class Places
      */
     private $name;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $drawers;
+    // /**
+    //  * @ORM\Column(type="integer", nullable=true)
+    //  */
+    // private $drawers;
 
     public function getId(): ?int
     {
@@ -43,15 +43,15 @@ class Places
         return $this;
     }
 
-    public function getDrawers(): ?int
-    {
-        return $this->drawers;
-    }
+    // public function getDrawers(): ?int
+    // {
+    //     return $this->drawers;
+    // }
 
-    public function setDrawers(?int $drawers): self
-    {
-        $this->drawers = $drawers;
+    // public function setDrawers(?int $drawers): self
+    // {
+    //     $this->drawers = $drawers;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }

@@ -39,7 +39,7 @@ class Recette
     private $timePrepa;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=11, nullable=true)
      */
     private $timeCook;
 
@@ -56,22 +56,22 @@ class Recette
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\CategoryRecette")
      */
-    private $id_CategoryRecette;
+    private $CategoryRecette;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\NumberPeople")
      */
-    private $id_NumberPeople;
+    private $NumberPeople;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Book")
      */
-    private $id_Book;
+    private $Book;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Page")
      */
-    private $id_Page;
+    private $Page;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\CommandeRecette", mappedBy="id_Recette")
@@ -142,12 +142,12 @@ class Recette
         return $this;
     }
 
-    public function getTimeCook(): ?int
+    public function getTimeCook(): ?string
     {
         return $this->timeCook;
     }
 
-    public function setTimeCook(int $timeCook): self
+    public function setTimeCook(string $timeCook): self
     {
         $this->timeCook = $timeCook;
 
@@ -178,50 +178,50 @@ class Recette
         return $this;
     }
 
-    public function getIdCategoryRecette(): ?CategoryRecette
+    public function getCategoryRecette(): ?CategoryRecette
     {
-        return $this->id_CategoryRecette;
+        return $this->CategoryRecette;
     }
 
-    public function setIdCategoryRecette(?CategoryRecette $id_CategoryRecette): self
+    public function setCategoryRecette(?CategoryRecette $CategoryRecette): self
     {
-        $this->id_CategoryRecette = $id_CategoryRecette;
+        $this->CategoryRecette = $CategoryRecette;
 
         return $this;
     }
 
-    public function getIdNumberPeople(): ?NumberPeople
+    public function getNumberPeople(): ?NumberPeople
     {
-        return $this->id_NumberPeople;
+        return $this->NumberPeople;
     }
 
-    public function setIdNumberPeople(?NumberPeople $id_NumberPeople): self
+    public function setNumberPeople(?NumberPeople $NumberPeople): self
     {
-        $this->id_NumberPeople = $id_NumberPeople;
+        $this->NumberPeople = $NumberPeople;
 
         return $this;
     }
 
-    public function getIdBook(): ?Book
+    public function getBook(): ?Book
     {
-        return $this->id_Book;
+        return $this->Book;
     }
 
-    public function setIdBook(?Book $id_Book): self
+    public function setBook(?Book $Book): self
     {
-        $this->id_Book = $id_Book;
+        $this->Book = $Book;
 
         return $this;
     }
 
-    public function getIdPage(): ?Page
+    public function getPage(): ?Page
     {
-        return $this->id_Page;
+        return $this->Page;
     }
 
-    public function setIdPage(?Page $id_Page): self
+    public function setPage(?Page $Page): self
     {
-        $this->id_Page = $id_Page;
+        $this->Page = $Page;
 
         return $this;
     }

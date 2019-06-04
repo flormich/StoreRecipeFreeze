@@ -56,6 +56,13 @@
                             </tr>
                             {% endfor %}
                         </tbody>
+                        
+                        <tr>
+                            <td>
+                                <br><br><br>
+                            </td>
+                        </tr>
+
                     </table>
                 </nav>
             </div>
@@ -85,39 +92,44 @@
                             </tr>
                             
                             {% for recette in recettes %}
-                            <tr onclick="document.location='{{ path('showSpecRecipe', {'id':recette.id}) }}'">
-                                <td>{{ recette.name }}</td>
-                                <td>Photo</td>
-                                <td>Plats</td>
-                                <td>{{ recette.numberPeople }}</td>                                
-                                <td><b>Prepa :</b> {{ recette.timePrepa|date('H:i:s') }} <br> <b>Cuiss :</b> {{ recette.timeBaking|date('H:i:s') }}</td>
-                                <td>{{ recette.plat.name }}</td>
-                                <td>{{ recette.book.name }}</td>
-                                <td>{{ recette.book.color }}</td>
-                                <td>{{ recette.page }}</td>
-                                <td><ul>
+                            <tr onclick="document.location='{{ path('showSpecRecette', {'id':recette.id}) }}'">
+                                <td class="borderTrue">{{ recette.name }}</td>
+                                <td class="borderTrue">Photo</td>
+                                <td class="borderTrue">{{ recette.CategoryRecette.name }}</td>
+                                <td></td>
+                                {# <td>{{ recette.NumberPeople }}</td>                                 #}
+                                <td class="borderTrue"><b>Preparation :</b> {{ recette.timePrepa|date('H:i:s') }} <br> <b>Cuisson :</b> {{ recette.timeCook|date('H:i:s') }}</td>
+
+                                {# <td  class="borderTrue">{{  recette.timePrepa|date('H:i:s') }} + {{recette.timeCook|date('H:i:s') }}</td> #}
+
+                                
+                                {# <td>{{ recette.Book.title }}</td>
+                                <td>{{ recette.Book.color }}</td> #}
+                                {# <td>{{ recette.Page }}</td> #}
+                                <td  class="borderTrue"><ul>
                                 {% for productRecette in productRecettes %}                                
                                     {% if recette.id == productRecette.recette.id %}
                                         <li>{{ productRecette.product.name }}<br></li>
                                     {% endif %}                                   
                                 {% endfor %}
                                 </ul></td>
-                                        <td>
+                                        <td  class="borderTrue">                                               
+                                        {# update button #}
+                                            <br>
+                                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit"> 
+                                                <a href="{{ path('updateRecipe', {'id':recette.id}) }}" style="color:white; text-decoration:none">Modifier</a>
+                                            </button>
+                                            <br><br>
+                                        </td>
+                                        <td  class="borderTrue">
                                         {# delete button #}
                                             <br>
                                             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit">                                               
                                                 <a href="{{ path('deleteRecipe', {'id':recette.id}) }}" style="color:white; text-decoration:none" onclick="if(!confirm('Confirmer la suppression du produit ?')) return false;">Supprimer</a>
                                             </button>
                                             <br><br>
-                                        {# </td>
-                                        <br>
-                                        <td>            #}
-                                        {# update button #}
-                                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit"> 
-                                                <a href="{{ path('updateRecipe', {'id':recette.id}) }}" style="color:white; text-decoration:none">Modifier</a>
-                                            </button>
-                                            <br><br>
                                         </td>
+
                             </tr>
                             {% endfor %}
                         </tbody>

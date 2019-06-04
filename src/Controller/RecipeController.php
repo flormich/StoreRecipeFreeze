@@ -6,16 +6,18 @@ use App\Entity\Book;
 use App\Entity\Page;
 use App\Entity\Product;
 use App\Entity\Recette;
+use App\Entity\NumberPeople;
 use App\Entity\ProductRecette;
-
 use App\Entity\CategoryProduct;
-
 use App\Entity\CategoryRecette;
+
 use App\Form\StoreRegisterType;
 use App\Form\RecipeRegisterType;
+
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -33,7 +35,7 @@ class RecipeController extends AbstractController
 
     private function addProductRecette(Form $form): Form
     {
-        return $form->add("productRecettes", EntityType::Class, [
+        return $form->add("ProductRecettes", EntityType::Class, [
             "label" => "Produit",
             "class" => ProductRecette::Class,
             "choice_label" => "Product",
@@ -43,9 +45,55 @@ class RecipeController extends AbstractController
         ]);
     }
 
+    private function addCategoryRecette(Form $form): Form
+    {
+        return $form->add("CategoryRecette", EntityType::class, [
+            "label" => "CategoryRecette",
+            "class" => CategoryRecette::Class,
+            "choice_label" => "name",
+            "expanded" => false,
+            "multiple" => false,
+            "required" => true,
+        ]);
+    }
+
+    private function addBook(Form $form): Form
+    {
+        return $form->add("Book", EntityType::class, [
+            "label" => "Book",
+            "class" => Book::class,
+            "choice_label" => "title",
+            "expanded" => false,
+            "multiple" => false,
+            "required" => true,
+        ]);
+    }
+
+    private function addPage(Form $form): Form
+    {
+        return $form->add("Page", EntityType::class, [
+            "label" => "Page",
+            "class" => Page::class,
+            "choice_label" => "number",
+            "expanded" => false,
+            "multiple" => false,
+            "required" => true,
+        ]);
+    }
+
+    private function addNumberPeople(Form $form): Form
+    {
+        return $form->add("NumberPeople", EntityType::class, [
+            "label" => "NumberPeople",
+            "class" => NumberPeople::class,
+            "choice_label" => "number",
+            "expanded" => false,
+            "multiple" => false,
+            "required" => true,
+        ]);
+    }
 
 
-//TODO
     /**
      * @Route("/createRecette", name="createRecette")
      */
@@ -53,6 +101,11 @@ class RecipeController extends AbstractController
     {
         $createRecipe = new Recette();
         $form = $this->createForm(RecipeRegisterType::class, $createRecipe);
+        $this->addCategoryRecette($form);
+        $this->addBook($form);
+        $this->addPage($form);
+        $this->addNumberPeople($form);
+
         // $this->addPlat($form);
         // $this->addBook($form);
 
@@ -97,6 +150,20 @@ class RecipeController extends AbstractController
             'categories' => $categories,
             'productRecettes' => $productRecettes,
             'plats' => $plats,
+        ]);
+    }
+
+    /**
+     * @Route ("/showSpecRecette/{id}", name="showSpecRecette")
+     */
+    public function showSpecRecette(Recette $recette)
+    {
+        $recettes = $this->getDoctrine()->getManager()->getRepository(Recette::class)->findById($recette);
+        // $products = $this->getDoctrine()->getManager()->getRepository(Product::class)->findAll();
+
+        return $this->render("recipe/showSpecRecipe.html.twig", [
+            'recettes' => $recettes,
+            // 'products' => $products,
         ]);
     }
 
