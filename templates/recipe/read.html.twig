@@ -112,24 +112,21 @@
                                         <li>{{ productRecette.product.name }}<br></li>
                                     {% endif %}                                   
                                 {% endfor %}
-                                </ul></td>
-                                        <td  class="borderTrue">                                               
-                                        {# update button #}
-                                            <br>
-                                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit"> 
-                                                <a href="{{ path('updateRecipe', {'id':recette.id}) }}" style="color:white; text-decoration:none">Modifier</a>
-                                            </button>
-                                            <br><br>
-                                        </td>
-                                        <td  class="borderTrue">
-                                        {# delete button #}
-                                            <br>
-                                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit">                                               
-                                                <a href="{{ path('deleteRecipe', {'id':recette.id}) }}" style="color:white; text-decoration:none" onclick="if(!confirm('Confirmer la suppression du produit ?')) return false;">Supprimer</a>
-                                            </button>
-                                            <br><br>
-                                        </td>
+                                </td>
+                                </ul>
+                                {# update button #}
+                                <td  class="borderTrue">
+                                    <a class="mdl-list__item-secondary-action mdl-grid" href="{{ path('updateRecipe', {'id':recette.id}) }}" style="color:white; text-decoration:none">
+                                        <i class="material-icons paragraphe">edit</i>
+                                    </a>
+                                </td>
 
+                                {# delete button #}
+                                <td  class="borderTrue">                                        
+                                    <a class="mdl-list__item-secondary-action mdl-grid" href="{{ path('deleteRecipe', {'id':recette.id}) }}" style="color:white; text-decoration:none">
+                                        <i class="material-icons paragraphe">remove_circle</i>
+                                        </a>
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>

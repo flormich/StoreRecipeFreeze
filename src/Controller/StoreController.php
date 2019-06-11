@@ -144,7 +144,7 @@ class StoreController extends AbstractController
     //     ]);
     // }
 
-//TODO
+
     /**
      * @Route ("/showProductCategory", name="showProductCategory")
      */
@@ -158,7 +158,7 @@ class StoreController extends AbstractController
 
         $em = $this->getDoctrine()->getManager()->getRepository(Product::class);
         $allProduct = $em->createQueryBuilder('p')
-            ->join('p.category', 'R')
+            ->join('p.id_CategoryProduct', 'R')
             ->where('R.name = :name')
             ->setParameter('name', $valeur)
             ->orderby('p.name', 'ASC')

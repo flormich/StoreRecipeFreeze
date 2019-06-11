@@ -116,7 +116,10 @@
                                             <img src="../assets/images/products/{{products.name}}.jpg" width='90%' />
                                         {% endif %}
                                     </td>    
-                                    <td class="borderTrue">{{ products.CategoryProduct.name}}</td>
+                                    <td class="pointerRead borderTrue" onclick="document.location='{{ path('showProductCategory',
+                                        {'name':products.CategoryProduct.name}) }}'">
+                                        {{ products.CategoryProduct.name }}
+                                    </td>
                                     {# <td class="pointerRead borderTrue" onclick="document.location='{ path('showProductCategory',
                                         {'name':product.Category.name}) }}'">
                                         {{ products.Category.name }}
