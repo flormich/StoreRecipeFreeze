@@ -24,12 +24,12 @@
                 <nav>
                     <table class="leftMenu">
                         <thead>
-                            <th class="captionTrie pointerRead borderTrue" onclick="document.location='{{ path('readStore') }}'">Trier par plat</th>
+                            <th class="captionTrie pointerRead borderTrue" onclick="document.location='{{ path('readRecette') }}'">Trier par plat</th>
                         </thead>
                         <tbody>
                             {% for plat in plats %}
                             <tr>
-                                <td class="pointerRead borderTrue textShadow" onclick="document.location='{{ path('showProductCategory', 
+                                <td class="pointerRead borderTrue textShadow" onclick="document.location='{{ path('showRecipeCategory', 
                                 {'name':plat.name}) }}'">
                                 {{ plat.name }}
                                 </td>
@@ -44,16 +44,20 @@
                         </tr>
 
                         <thead>
-                            <th class="captionTrie pointerRead borderTrue" onclick="document.location='{{ path('readStore') }}'">Trier par catégorie</th>
+                            <th class="captionTrie pointerRead borderTrue" onclick="document.location='{{ path('readRecette') }}'">Trier par recette</th>
                         </thead>
                         <tbody>
-                            {% for category in categories %}
+                        {% set newArray = [] %}
+                            {% for recette in recettes %}
+                            {% if recette.name not in newArray %}
                             <tr>
-                                <td class="pointerRead borderTrue textShadow" onclick="document.location='{{ path('showProductCategory', 
-                                {'name':category.name}) }}'">
-                                {{ category.name }}
+                                <td class="pointerRead borderTrue textShadow" onclick="document.location='{{ path('showRecipeCategory', 
+                                {'name':recette.name}) }}'">
+                                {{ recette.name }}
                                 </td>
                             </tr>
+                            {% set newArray = newArray|merge ([ recette.name ]) %}
+                            {% endif %}
                             {% endfor %}
                         </tbody>
                         
@@ -76,7 +80,7 @@
                     <table class="tableShowJob backgroundWhite borderTrue">
                         <tbody class="pointerRead">
                             <tr>
-                                <th rowspan="2" class="thTab borderTrue" onclick="document.location='showProductNameAsc'">Nom de la recete</th>
+                                <th rowspan="2" class="thTab borderTrue" onclick="document.location='showProductNameAsc'">Nom de la recette</th>
                                 <th rowspan="2" class="thTab borderTrue">Photos</th>
                                 <th rowspan="2" class="thTab borderTrue">Plats</th>
                                 <th rowspan="2" class="thTab borderTrue" onclick="document.location='showProductCatAsc'">Catégorie</th>
@@ -96,7 +100,7 @@
                                 <td class="borderTrue">{{ recette.name }}</td>
                                 <td class="borderTrue">Photo</td>
                                 <td class="borderTrue">{{ recette.CategoryRecette.name }}</td>
-                                <td></td>
+                                <td class="borderTrue"></td>
                                 {# <td>{{ recette.NumberPeople }}</td>                                 #}
                                 <td class="borderTrue"><b>Preparation :</b> {{ recette.timePrepa|date('H:i:s') }} <br> <b>Cuisson :</b> {{ recette.timeCook|date('H:i:s') }}</td>
 

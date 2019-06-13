@@ -35,23 +35,19 @@
                             <th class="borderTrue">Temps</th>
                             <th class="borderTrue">Livres</th>
                         </tr>
-                        <tr class="borderTrue">
+                        {# <tr class="borderTrue">
                             <td rowspan='1' class="borderTrue">
-                            {% for recette in recettes %}
+                                {% for recette in recettes %}
                                 {# {% if recette.id == productRecette.recette.id %} #}
                                     {# <li>{{ productRecette.product.name }}</li><br> #}
                                 {# {% endif %}                                 #}
-                                <td></td>
-                            {% endfor %}
-                            
+                                {# <td></td>
+                                {% endfor %}                            
                             </td>
-                            {# </tr> #}
-
-                            {# <tr>
-                                <th>Nombre de personne</th>
-                                <th>Temps</th>
-                                <th>Livres</th>
-                            </tr> #}
+                        </tr> #}
+                        <tr>
+                    <td class="borderTrue">{{ recette.numberPeople.number }}</td>
+                            <td class="borderTrue">Ingrédient </td>
                             {# <tr> #}
                                 {# <td>{{ recette.numberPeople }}</td> #}
                             <td class="borderTrue"><b> Temps de préparation : </b>{{ recette.timePrepa|date('H:i:s') }}

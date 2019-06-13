@@ -93,6 +93,18 @@ class RecipeController extends AbstractController
         ]);
     }
 
+    private function addProduct(Form $form): Form
+    {
+        return $form->add('productRecettes', EntityType::class, [
+            "label" => "productRecettes",
+            "class" => ProductRecette::class,
+            "choice_label" => "name",
+            "expanded" => false,
+            "multiple" => false,
+            "required" => true,
+        ]);
+    }
+
 
     /**
      * @Route("/createRecette", name="createRecette")
@@ -105,6 +117,7 @@ class RecipeController extends AbstractController
         $this->addBook($form);
         $this->addPage($form);
         $this->addNumberPeople($form);
+        $this->addProduct($form);
 
         // $this->addPlat($form);
         // $this->addBook($form);
@@ -260,51 +273,33 @@ class RecipeController extends AbstractController
     }
 
 
-        // /**
-    //  * @Route ("/showRecipeCategory", name="showRecipeCategory")
-    //  */
-    // public function showRecipeCategory(Request $request)
-    // {
-    //     $plats = $this->getDoctrine()->getManager()->getRepository(CategoryRecette::class)->findBy([], ['name'=>'ASC']);
-    //     $recipesAsc = $this->getDoctrine()->getManager()->getRepository(Recette::class)->findBy([],['name' => 'ASC']);
-    //     $productRecettes = $this->getDoctrine()->getManager()->getRepository(ProductRecette::class)->findAll();
+    /**
+     * @Route ("/showRecipeCategory", name="showRecipeCategory")
+     */
+    public function showRecipeCategory(Request $request)
+    {
+        $recettes = $this->getDoctrine()->getManager()->getRepository(Recette::class)->findAll();
+        $categories = $this->getDoctrine()->getManager()->getRepository(CategoryProduct::class)->findBy([], ['name'=>'ASC']);
+        $productRecettes = $this->getDoctrine()->getManager()->getRepository(ProductRecette::class)->findAll();
+        $plats = $this->getDoctrine()->getManager()->getRepository(CategoryRecette::class)->findAll();       
 
+        $request = Request::createFromGlobals();
+        $valeur = $request->query->get('name');
 
-    //     $request = Request::createFromGlobals();
-    //     $valeur = $request->query->get('name');
+        $em = $this->getDoctrine()->getManager()->getRepository(Recette::class);
+        $recettes = $em->createQueryBuilder('p')
+            ->join('p.CategoryRecette', 'R')
+            ->where('R.name = :name')
+            ->setParameter('name', $valeur)
+            ->orderby('p.name', 'ASC')
+            ->getQuery()
+            ->getResult();
 
-    //     $em = $this->getDoctrine()->getManager()->getRepository(Recette::class);
-    //     $recettes = $em->createQueryBuilder('p')
-    //         ->join('p.CategoryRecette', 'R')
-    //         ->where('R.name = :name')
-    //         ->setParameter('name', $valeur)
-    //         ->orderby('p.name', 'ASC')
-    //         ->getQuery()
-    //         ->getResult();
-
-    //     return $this->render('recipe/read.html.twig', [
-    //         'recettes' => $recettes,
-    //         'plats' => $plats,
-    //         'recipesAsc' => $recipesAsc,
-    //         'productRecettes' => $productRecettes,
-    //     ]);
-    // }
-
-    //     /**
-    //  * @Route("/readRecette", name="readRecette")
-    //  */
-    // public function readRecette(Request $request)
-    // {
-    //     $recettes = $this->getDoctrine()->getManager()->getRepository(Recette::class)->findAll();
-    //     $categories = $this->getDoctrine()->getManager()->getRepository(CategoryProduct::class)->findBy([], ['name'=>'ASC']);
-    //     $productRecettes = $this->getDoctrine()->getManager()->getRepository(ProductRecette::class)->findAll();
-    //     $plats = $this->getDoctrine()->getManager()->getRepository(CategoryRecette::class)->findAll();
-        
-    //     return $this->render('recipe/read.html.twig', [
-    //         'recettes' => $recettes,
-    //         'categories' => $categories,
-    //         'productRecettes' => $productRecettes,
-    //         'plats' => $plats,
-    //     ]);
-    // }
+        return $this->render('recipe/read.html.twig', [
+            'recettes' => $recettes,
+            'categories' => $categories,
+            'productRecettes' => $productRecettes,
+            'plats' => $plats,
+        ]);
+    }
 }
