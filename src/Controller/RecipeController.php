@@ -11,13 +11,13 @@ use App\Entity\ProductRecette;
 use App\Entity\CategoryProduct;
 use App\Entity\CategoryRecette;
 
-use App\Form\StoreRegisterType;
+use App\Form\ProductRegisterType;
 use App\Form\RecipeRegisterType;
 
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -93,17 +93,29 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    private function addProduct(Form $form): Form
-    {
-        return $form->add('productRecettes', EntityType::class, [
-            "label" => "productRecettes",
-            "class" => ProductRecette::class,
-            "choice_label" => "name",
-            "expanded" => false,
-            "multiple" => false,
-            "required" => true,
-        ]);
-    }
+    // private function addProduct(Form $form): Form
+    // {
+    //     return $form->add('product', EntityType::class, [
+    //         "label" => "product",
+    //         "class" => Product::class,
+    //         "choice_label" => "name",
+    //         "expanded" => false,
+    //         "multiple" => false,
+    //         "required" => true,
+    //     ]);
+    // }
+
+    // private function addProduct(Form $form): Form
+    // {
+    //     return $form->add('productRecettes', EntityType::class, [
+    //         "label" => "productRecettes",
+    //         "class" => ProductRecette::class,
+    //         "choice_label" => "name",
+    //         "expanded" => false,
+    //         "multiple" => false,
+    //         "required" => true,
+    //     ]);
+    // }
 
 
     /**
@@ -117,13 +129,13 @@ class RecipeController extends AbstractController
         $this->addBook($form);
         $this->addPage($form);
         $this->addNumberPeople($form);
-        $this->addProduct($form);
+        // $this->addProduct($form);
 
         // $this->addPlat($form);
         // $this->addBook($form);
 
-        // $createStore = new Product();
-        // $form2 = $this->createForm(StoreRegisterType::class, $createStore);
+        $createStore = new Product();
+        $form2 = $this->createForm(ProductRegisterType::class, $createStore);
 
         // $productRecette = new ProductRecette();
         // $productRecette->setRecette($createRecipe);
@@ -144,7 +156,7 @@ class RecipeController extends AbstractController
         }
         return $this->render('recipe/create.html.twig', [
             'form' => $form->createView(),
-            // 'form2' => $form2->createView(),
+            'form2' => $form2->createView(),
         ]);
     }
 

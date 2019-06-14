@@ -80,14 +80,14 @@ class StoreController extends AbstractController
         $createStore = new Product();
         $form = $this->createForm(ProductRegisterType::class, $createStore);
         $this->addCategoryProduct($form);
-        $createStore->setStock($createStock);
+        // $createStore->setStock($createStock);
     
         $form->handleRequest($request);
         $form2->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($createStock);
+            // $em->persist($createStock);
             $em->persist($createStore);
             $em->flush();
     

@@ -28,12 +28,12 @@
             }
         }) }}
 
-        {# {{ form_start(form2, {
+        {{ form_start(form2, {
             attr: {
                 novalidate: "novalidate",
                 class: "row"
             }
-        }) }} #}
+        }) }}
 
         <div class="border col-12 col-lg6">
             <table>
@@ -66,7 +66,8 @@
             <table>
                 <tr>
                     <td>
-                    {{ form_row(form.productRecettes) }}
+                    {{ form_row(form2.name) }}
+                    {# {{ form_row(form.productRecettes) }} #}
                     </td>
                     <td>
                     {{ form_row(form.quantityGram) }}
@@ -76,7 +77,7 @@
                     </td>
                 </tr>
             </table>
-            <table>
+            {# <table>
                 <tr>
                     <td>
                     {{ form_row(form.productRecettes) }}
@@ -88,7 +89,7 @@
                     {{ form_row(form.quantityUnit) }}
                     </td>
                 </tr>
-            </table>
+            </table> #}
             
             <br>
             <hr>
@@ -112,7 +113,7 @@
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--myColorValidate" type="submit">Valider</button>
             <br>
             {{ form_end(form) }}
-            {# {{ form_end(form2)}} #}
+            {{ form_end(form2)}}
             <br>
         </div>
         <br>
